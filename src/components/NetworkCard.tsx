@@ -14,7 +14,7 @@ const NetworkCard = ({ title, dailyData, dailyState, dailyStatChange, yesterdayD
         <h2 className="ml-4 text-white text-xl">{title}</h2>
       </div>
       <div className="mt-4 flex justify-between">
-        <button
+        <button 
           className={`px-4 py-2 rounded-lg ${activeData === 'daily' ? 'bg-teal-800 text-white' : 'bg-teal-600 text-teal-200'}`}
           onClick={() => setActiveData('daily')}
         >
