@@ -32,15 +32,31 @@ const Home = () => {
     ],
     network: {
       title: '网点',
+      dailyState:'1600',
+      dailyStatChange:'18%',
       dailyData: [
         { name: '湖南省长沙市', value: 1600 },
         { name: '山东省济南市', value: 1500 },
-        // 更多网点数据...
+        { name: '云南省昆明市', value: 1400 },
+        { name: '湖北省武汉市', value: 1300 },
+        { name: '山西省太原市', value: 1200 },
+        { name: '福建省福州市', value: 1100 },
+        { name: '浙江省杭州市', value: 1000 },
+        { name: '江苏省南京市', value: 900 },
+        { name: '广东省广州市', value: 800 },
+        { name: '北京市', value: 700 },
       ],
       yesterdayData: [
         { name: '湖南省长沙市', value: 1400 },
         { name: '山东省济南市', value: 1300 },
-        // 更多网点数据...
+        { name: '云南省昆明市', value: 1200 },
+        { name: '湖北省武汉市', value: 1100 },
+        { name: '山西省太原市', value: 1000 },
+        { name: '福建省福州市', value: 900 },
+        { name: '浙江省杭州市', value: 800 },
+        { name: '江苏省南京市', value: 700 },
+        { name: '广东省广州市', value: 600 },
+        { name: '北京市', value: 500 },
       ],
     },
     charging: {

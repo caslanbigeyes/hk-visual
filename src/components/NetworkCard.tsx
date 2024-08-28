@@ -1,38 +1,9 @@
 import React, { useState } from 'react';
-import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
-
-const NetworkCard = ({ title, dailyData, yesterdayData }) => {
+const NetworkCard = ({ title, dailyData, dailyState, dailyStatChange, yesterdayData }) => {
   const [activeData, setActiveData] = useState('daily');
 
-  const data = {
-    labels: activeData === 'daily' ? dailyData.map(loc => loc.name) : yesterdayData.map(loc => loc.name),
-    datasets: [
-      {
-        label: '活跃度',
-        data: activeData === 'daily' ? dailyData.map(loc => loc.value) : yesterdayData.map(loc => loc.value),
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const options = {
-    indexAxis: 'y',
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: '网点活跃度排名（前10）',
-      },
-    },
-  };
+  const data = activeData === 'daily' ? dailyData : yesterdayData;
 
   return (
     <div className="bg-gradient-to-r from-teal-500 to-teal-700 p-6 rounded-lg shadow-lg">
@@ -57,7 +28,22 @@ const NetworkCard = ({ title, dailyData, yesterdayData }) => {
         </button>
       </div>
       <div className="mt-4">
-        <Bar data={data} options={options} />
+        {data.map((loc, index) => (
+          <div key={index} className="flex items-center justify-between mb-2">
+            <div className="flex items-center w-1/3">
+              <span className="text-white mr-2">{index + 1}</span>
+              <span className="text-white">{loc.name}</span>
+            </div>
+            <div className="w-2/3 bg-teal-600 h-4 rounded-lg overflow-hidden">
+              <div className="bg-teal-400 h-4" style={{ width: `${(loc.value / 1600) * 100}%` }}></div>
+            </div>
+            <span className="text-teal-200 ml-2">{loc.value}</span>
+          </div>
+        ))}
+      </div>
+      <div className="mt-4 bg-blue-800 p-2 rounded-lg">
+        <p className="text-white text-xl">{dailyState}</p>
+        <p className="text-green-400">{dailyStatChange}</p>
       </div>
     </div>
   );
