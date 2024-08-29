@@ -1,11 +1,12 @@
 import React from 'react';
+import CustomImage from '@/components/CustomImage';
 
 const AppUsageCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChange }) => {
   return (
     <div className="bg-gradient-to-r from-orange-500 to-orange-700 p-6 rounded-lg shadow-lg">
       <div className="flex items-center">
         <div className="bg-orange-700 p-2 rounded-full">
-          <img src="/app-icon.svg" alt="App Icon" className="w-6 h-6" />
+          <CustomImage src="/userIcon.png" width={32} height={32} alt="App Icon" />
         </div>
         <h2 className="ml-4 text-white text-xl">{title}</h2>
       </div>
