@@ -1,49 +1,126 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import CustomImage from '@/components/CustomImage';
+import CustomLineChart from '@/components/CustomLineChart';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
 const NetworkCard = ({ title, dailyData, dailyState, dailyStatChange, yesterdayData }) => {
   const [activeData, setActiveData] = useState('daily');
+  const containerRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [containerHeight, setContainerHeight] = useState(0);
 
-  const data = activeData === 'daily' ? dailyData : yesterdayData;
+  useEffect(() => {
+    if (containerRef.current) {
+      setContainerWidth(containerRef.current.offsetWidth);
+      const otherElementsHeight = Array.from(containerRef.current.children)
+        .reduce((total, child) => total + child.offsetHeight, 0);
+      setContainerHeight(containerRef.current.offsetHeight - otherElementsHeight);
+    }
+  }, []);
+
+  let dataTemp = activeData === 'daily' ? dailyData : yesterdayData;
+  let data = {
+    labels: ['10', '11', '12', '13', '14', '15', '16', '17'],
+    datasets: [
+      {
+        label: '每日新增用户数',
+        data: [500, 600, 800, 1000, 1200, 1400, 1800, 2000],
+        borderColor: '#9b5de5',
+        backgroundColor: 'rgba(155, 93, 229, 0.2)',
+        fill: true,
+        tension: 0.4,
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            return `${context.raw}K`;
+          },
+          afterLabel: function (context) {
+            return `2024.${context.label}`;
+          },
+        },
+      },
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+        ticks: {
+          color: '#9b5de5',
+        },
+      },
+      y: {
+        grid: {
+          color: '#555',
+        },
+        ticks: {
+          color: '#9b5de5',
+        },
+      },
+    },
+  };
 
   return (
-    <div className="bg-gradient-to-r from-teal-500 to-teal-700 p-6 rounded-lg shadow-lg">
+    <div ref={containerRef} className="p-6 bg-[#24263A] w-[841px] h-[479px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
       <div className="flex items-center">
-        <div className="bg-teal-700 p-2 rounded-full">
-          <img src="/network-icon.svg" alt="Network Icon" className="w-6 h-6" />
+        <div className="p-2 pl-0">
+          <CustomImage src="/net.png" width={32} height={32} alt="App Icon" />
         </div>
-        <h2 className="ml-4 text-white text-xl">{title}</h2>
+        <div className='flex justify-between w-full'>
+          <h2 className=" text-white text-xl">{title}</h2>
+          <h2 className="text-xl text-[#A3A3A3]">网点活跃度排名（前10）</h2>
+        </div>
       </div>
-      <div className="mt-4 flex justify-between">
-        <button 
-          className={`px-4 py-2 rounded-lg ${activeData === 'daily' ? 'bg-teal-800 text-white' : 'bg-teal-600 text-teal-200'}`}
-          onClick={() => setActiveData('daily')}
-        >
-          每日新增设备
-        </button>
-        <button
-          className={`px-4 py-2 rounded-lg ${activeData === 'yesterday' ? 'bg-teal-800 text-white' : 'bg-teal-600 text-teal-200'}`}
-          onClick={() => setActiveData('yesterday')}
-        >
-          昨日新增设备
-        </button>
-      </div>
-      <div className="mt-4">
-        {data.map((loc, index) => (
-          <div key={index} className="flex items-center justify-between mb-2">
-            <div className="flex items-center w-1/3">
-              <span className="text-white mr-2">{index + 1}</span>
-              <span className="text-white">{loc.name}</span>
+
+      <div className="mt-4 grid grid-cols-2 gap-4">
+        <div>
+          {dataTemp.slice(0, 5).map((loc, index) => (
+            <div key={index} className="flex items-center justify-between mb-2">
+              <div className="flex items-center w-1/2">
+                <span className="text-white mr-2">{index + 1}</span>
+                <span className="text-white">{loc.name}</span>
+              </div>
+              <div className="w-1/2 bg-[linear-gradient(360deg,#5C4F8E_0%,#668DE0_30%,#10D3F1_100%)] rounded-full h-4 overflow-hidden">
+                <div className="bg-[linear-gradient(360deg,#5C4F8E_0%,#668DE0_30%,#10D3F1_100%)] rounded-full h-4" style={{ width: `${(loc.value / 1600) * 100}%` }}></div>
+              </div>
             </div>
-            <div className="w-2/3 bg-teal-600 h-4 rounded-lg overflow-hidden">
-              <div className="bg-teal-400 h-4" style={{ width: `${(loc.value / 1600) * 100}%` }}></div>
+          ))}
+        </div>
+        <div>
+          {dataTemp.slice(5, 10).map((loc, index) => (
+            <div key={index + 5} className="flex items-center justify-between mb-2">
+              <div className="flex items-center w-1/2">
+                <span className="text-white mr-2">{index + 6}</span>
+                <span className="text-white">{loc.name}</span>
+              </div>
+              <div className="w-1/2 bg-[linear-gradient(360deg,#5C4F8E_0%,#668DE0_30%,#10D3F1_100%)] rounded-full h-4 overflow-hidden">
+                <div className="bg-[linear-gradient(360deg,#5C4F8E_0%,#668DE0_30%,#10D3F1_100%)] rounded-full h-4" style={{ width: `${(loc.value / 1600) * 100}%` }}></div>
+              </div>
             </div>
-            <span className="text-teal-200 ml-2">{loc.value}</span>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-      <div className="mt-4 bg-blue-800 p-2 rounded-lg">
-        <p className="text-white text-xl">{dailyState}</p>
-        <p className="text-green-400">{dailyStatChange}</p>
+
+      <div className="mt-4 flex justify-center w-[160px] h-[40px] bg-[#10D3F1] rounded-lg">
+        <button onClick={() => setActiveData('daily')}>
+          每日新增网点数
+        </button>
+      </div>
+
+      <div className='flex w-full mt-[20px]'>
+        <CustomLineChart data={data} options={options} parentWidth={containerWidth} parentHeight={150} />
       </div>
     </div>
   );

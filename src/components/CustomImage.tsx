@@ -3,7 +3,6 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 const CustomImage = ({ src, alt, width, height, layout = 'responsive', objectFit = 'cover', className = '', ...props }) => {
-    console.log(props,'p')
     return (
         <div className={`custom-image-wrapper ${className}`} style={{ width, height }}>
             <Image

@@ -56,9 +56,9 @@ const UserCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChange })
   };
 
   return (
-    <div className=" p-6  w-[463px] h-[423px] bg-[#24263A]">
+    <div className="p-6 w-[463px]  h-[423px] bg-[#24263A] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
       <div className="flex items-center">
-        <div className="p-2">
+        <div className="p-2 pl-0">
           <CustomImage src="/userIcon.png" width={32} height={32} alt="App Icon" />
         </div>
         <h2 className="bold text-white text-xl">{title}</h2>
@@ -81,10 +81,8 @@ const UserCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChange })
         每日新增用户统计
       </div>
 
-      <div className='flex mt-[20px]'>
-        <div>
-          <CustomLineChart data={data} options={options} />
-        </div>
+      <div className='flex w-[400px] mt-[20px]'>
+        <CustomLineChart data={data} options={options} />
       </div>
     </div>
   );

@@ -1,14 +1,34 @@
 import React from 'react';
+import CustomImage from '@/components/CustomImage';
 
 const OrderList = ({ orders }) => {
   return (
-    <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg shadow-lg">
-      <h2 className="text-white text-xl mb-4">实时充电订单</h2>
+    <div className="p-6 h-[421px] bg-[#24263A] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
+      <div className="flex items-center">
+        <div className="p-2 pl-0">
+          <CustomImage src="/onlineOrder.png" width={32} height={32} alt="App Icon" />
+        </div>
+        <h2 className="text-white text-xl">实时充电订单</h2>
+      </div>
+      <div className="mt-4">
+        <div className="flex items-center justify-between mb-2 p-2
+         w-[779px] h-[38px] bg-[#EFEFEF] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
+          <div className="flex items-end justify-end">
+            <span className="ml-[55px]
+            font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A]">用户</span>
+          </div>
+          <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A]">网点</span>
+          <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A]">开始时间</span>
+          <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A] mr-[38px]">结束时间</span>
+        </div>
+      </div>
       <div className="overflow-y-auto max-h-64">
         {orders.map((order, index) => (
-          <div key={index} className="flex items-center justify-between mb-2 p-2 bg-gray-700 rounded-lg">
+          <div key={index} className="flex items-center justify-between mb-2 p-2
+          font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-sm text-[#FFFFFF]
+          rounded-lg">
             <div className="flex items-center">
-              <img src={order.userImage} alt="User" className="w-8 h-8 rounded-full mr-2" />
+              <img src={'/userIcon.png'} alt="User" className="w-8 h-8 rounded-full mr-2" />
               <p className="text-white">{order.user}</p>
             </div>
             <p className="text-gray-400">{order.location}</p>
