@@ -28,6 +28,49 @@ const CustomLineChart = ({ data, options, parentWidth = 244, parentHeight }) => 
                 },
             },
         },
+        scales: {
+            x: {
+                grid: {
+                    // color: '#000',
+                    borderDash: [5, 5], // 设置虚线
+                    color: function (context) {
+                        console.log(context,222)
+                        if (context.tick && context.tick.label === '10') {
+                            console.log(111)
+                            return 'transparent'; // 去掉第一个 x 轴的竖线
+                        }
+                        // return '#000';
+                    },
+                },
+                ticks: {
+                    color: '#474C55',
+                    font: {
+                        size: 12,
+                    },
+                },
+            },
+                y: {
+                    // grid: {
+                    //     color: '#000',
+                    //     borderDash: [5, 5], // 设置虚线
+                    // },
+                    ticks: {
+                        color: '#474C55',
+                        font: {
+                            size: 12,
+                        },
+                    },
+                },
+        },
+        elements: {
+            point: {
+                radius: 0, // 移除交点的小圆点
+            },
+            line: {
+                tension: 0, // 设置为折线图
+                borderWidth: 1, // 设置线条的宽度
+            },
+        },
     };
 
     return (

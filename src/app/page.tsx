@@ -9,6 +9,20 @@ import AppUsageCard from '@/components/AppUsageCard';
 import CustomImage from '@/components/CustomImage';
 
 const Home = () => {
+
+
+  useEffect(() => {
+    // 1分钟调用一次接口 fetch
+    const intervalId = setInterval(() => {
+      fetch('/api/screen/detaile', {
+        'x-client': '1'
+      }
+      ).then(res => res.json()).then(data => {
+        console.log(data)
+      })
+    }, 60000);
+  }, [])
+
   const mockData = {
     user: {
       title: '用户',
@@ -29,7 +43,20 @@ const Home = () => {
     orders: [
       { user: '123****1234', userImage: '/user1.png', location: '湖南省长沙市', startTime: '2034/03/27 17:57', endTime: '2034/03/27 17:57' },
       { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
-      // 更多订单数据...
+      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
+
+      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
+
+      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
+
+      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
+
+      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
+
+      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
+
+      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
+
     ],
     network: {
       title: '网点',
