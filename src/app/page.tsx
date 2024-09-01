@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import UserCard from '@/components/UserCard';
 import EquipmentCard from '@/components/EquipmentCard';
 import OrderList from '@/components/OrderList';
@@ -9,80 +9,85 @@ import AppUsageCard from '@/components/AppUsageCard';
 import CustomImage from '@/components/CustomImage';
 
 const Home = () => {
+  const [data, setData] = useState(null);
 
-  /*
-       JS部分
-       */
-  //数据大屏自适应函数
+  // 数据大屏自适应函数
   const handleScreenAuto = () => {
-    console.log(1)
-    const designDraftWidth = 1920;//设计稿的宽度
-    const designDraftHeight = 1080;//设计稿的高度
-    //根据屏幕的变化适配的比例
+    const designDraftWidth = 1920; // 设计稿的宽度
+    const designDraftHeight = 1080; // 设计稿的高度
+    // 根据屏幕的变化适配的比例
     const scale = document.documentElement.clientWidth / document.documentElement.clientHeight < designDraftWidth / designDraftHeight ?
       (document.documentElement.clientWidth / designDraftWidth) :
       (document.documentElement.clientHeight / designDraftHeight);
-    //缩放比例
+    // 缩放比例
     (document.querySelector('#screen') as any).style.transform = `scale(${scale}) translate(-50%)`;
   }
 
-  //React的生命周期 如果你是vue可以放到mountd或created中
+  // React的生命周期
   useEffect(() => {
-    //初始化自适应  ----在刚显示的时候就开始适配一次
+    // 初始化自适应
     handleScreenAuto();
-    //绑定自适应函数   ---防止浏览器栏变化后不再适配
+    // 绑定自适应函数
     window.onresize = () => handleScreenAuto();
-    //退出大屏后自适应消失   ---这是react的组件销毁生命周期，如果你是vue则写在deleted中。最好在退出大屏的时候接触自适应
+    // 退出大屏后自适应消失
     return () => window.onresize = null;
   }, [])
-
 
   useEffect(() => {
     // 1分钟调用一次接口 fetch
     const intervalId = setInterval(() => {
       fetch('/api/screen/detaile', {
-        'x-client': '1'
-      }
-      ).then(res => res.json()).then(data => {
-        // console.log(data)
+        headers: { 'x-client': '1' }
       })
+        .then(res => res.json())
+        .then(data => {
+          if (data.code === 0) {
+            setData(data.data);
+          }
+        })
+        .catch(() => {
+          setData(mockData);
+        });
     }, 60000);
+
+    // 初次加载时调用接口
+    fetch('/api/screen/detaile', {
+      headers: { 'x-client': '1' }
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.code === 0) {
+          setData(data.data);
+        }
+      })
+      .catch(() => {
+        setData(mockData);
+      });
+
+    return () => clearInterval(intervalId);
   }, [])
 
   const mockData = {
     user: {
       title: '用户',
-      todayCount: '1600',
-      totalCount: '16000',
+      todayCount: 1600,
+      totalCount: 16000,
       dailyStat: '16K',
       dailyStatChange: '11.94%',
     },
     equipment: {
       title: '设备',
-      onlineCount: '1600',
-      offlineCount: '0',
-      chargingCount: '12600',
-      idleCount: '160',
+      onlineCount: 1600,
+      offlineCount: 0,
+      chargingCount: 12600,
+      idleCount: 160,
       dailyStat: '13600',
       dailyStatChange: '11.94%',
     },
     orders: [
       { user: '123****1234', userImage: '/user1.png', location: '湖南省长沙市', startTime: '2034/03/27 17:57', endTime: '2034/03/27 17:57' },
       { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
-      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
-
-      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
-
-      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
-
-      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
-
-      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
-
-      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
-
-      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
-
+      // 更多订单数据...
     ],
     network: {
       title: '网点',
@@ -115,19 +120,82 @@ const Home = () => {
     },
     charging: {
       title: '充电',
-      todayCount: '1600',
-      totalCount: '1440',
-      dailyStat: '10600',
+      todayCount: 1600,
+      totalCount: 14400,
+      dailyStat: 10600,
       dailyStatChange: '11.94%',
     },
     appUsage: {
       title: 'App 使用情况',
-      todayCount: '11600',
-      totalCount: '160009',
-      dailyStat: '169999',
+      todayCount: 11600,
+      totalCount: 160009,
+      dailyStat: 169999,
       dailyStatChange: '11.94%',
     },
   };
+
+  const getUserCardData = (data) => ({
+    title: '用户',
+    todayCount: data.accountCount,
+    totalCount: data.accountTotalcount,
+    dailyStat: data?.accountScreenDTOList?.map(item => item.count).join(', '),
+    dailyStatChange: '11.94%', // 需要根据实际情况调整
+  });
+
+  const getEquipmentCardData = (data) => ({
+    title: '设备',
+    onlineCount: data?.deviceScreenDTO?.countOnline,
+    offlineCount: data?.deviceScreenDTO?.countOffline,
+    chargingCount: data?.deviceScreenDTO?.countCharge,
+    idleCount: data?.deviceScreenDTO?.countIdle,
+    dailyStat: data?.deviceAddScreenDTOList?.map(item => item.count).join(', '),
+    dailyStatChange: '11.94%', // 需要根据实际情况调整
+  });
+
+  const getOrderListData = (data) => data?.orderScreenDTOList?.map(order => ({
+    user: order.name,
+    userImage: '/user1.png', // 假设所有用户使用相同的图像
+    location: order.address,
+    startTime: new Date(order.timeBegin).toLocaleString(),
+    endTime: new Date(order.timeEnd).toLocaleString(),
+  }));
+
+  const getNetworkCardData = (data) => ({
+    title: '网点',
+    dailyState: data?.networkAddScreenDTOList?.map(item => item.count).join(', '),
+    dailyStatChange: '18%', // 需要根据实际情况调整
+    dailyData: data?.networkScreenDTOList?.map(item => ({
+      name: item.name,
+      value: item.active,
+    })),
+    yesterdayData: data?.networkScreenDTOList?.map(item => ({
+      name: item.name,
+      value: item.active, // 假设昨天的数据与今天的数据相同，需要根据实际情况调整
+    })),
+  });
+
+  const getChargingCardData = (data) => ({
+    title: '充电',
+    todayCount: data.chargeCount,
+    totalCount: data.chargeTotalcount,
+    dailyStat: data?.chargeScreenDTOList?.map(item => item.chargeCount).join(', '),
+    dailyStatChange: '11.94%', // 需要根据实际情况调整
+  });
+
+  const getAppUsageCardData = (data) => ({
+    title: 'App 使用情况',
+    todayCount: data.appCount,
+    totalCount: data.appTotalcount,
+    dailyStat: data?.appScreenDTOList?.map(item => item.count).join(', '),
+    dailyStatChange: '11.94%', // 需要根据实际情况调整
+  });
+
+  const userCardData = data ? getUserCardData(data) : mockData.user;
+  const equipmentCardData = data ? getEquipmentCardData(data) : mockData.equipment;
+  const orderListData = data ? getOrderListData(data) : mockData.orders;
+  const networkCardData = data ? getNetworkCardData(data) : mockData.network;
+  const chargingCardData = data ? getChargingCardData(data) : mockData.charging;
+  const appUsageCardData = data ? getAppUsageCardData(data) : mockData.appUsage;
 
   return (
     <div className='h-full w-full bg-custom-bg'>
