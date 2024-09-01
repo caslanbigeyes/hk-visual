@@ -34,9 +34,7 @@ const CustomLineChart = ({ data, options, parentWidth = 244, parentHeight }) => 
                     // color: '#000',
                     borderDash: [5, 5], // 设置虚线
                     color: function (context) {
-                        console.log(context,222)
                         if (context.tick && context.tick.label === '10') {
-                            console.log(111)
                             return 'transparent'; // 去掉第一个 x 轴的竖线
                         }
                         // return '#000';
@@ -77,7 +75,7 @@ const CustomLineChart = ({ data, options, parentWidth = 244, parentHeight }) => 
         <div className="bg-[#24263A] flex w-full">
             <div>
                 <div className="text-white text-5xl font-bold">{currentValue}K</div>
-                <div className="text-[#F19CFF] text-lg font-semibold mt-2 flex justify-center items-center">
+                <div className="text-[#F19CFF] text-lg font-semibold mt-2 flex justify-start items-center">
                     <CustomImage src='/arrowTop.png' width={6} height={10} />
                     <div className='ml-[5px] text-[16px] font-bold'> 11.94%</div>
                 </div>

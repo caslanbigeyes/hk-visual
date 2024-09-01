@@ -1,7 +1,8 @@
 import React from 'react';
 import CustomLineChart from '@/components/CustomLineChart'
-
 import CustomImage from '@/components/CustomImage';
+import CountUp from 'react-countup';
+
 
 const ChargingCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChange }) => {
 
@@ -57,7 +58,7 @@ const ChargingCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChang
   };
 
   return (
-    <div className="p-6  w-[463px]    bg-[#24263A] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
+    <div className="p-6  w-[463px] h-[552px]    bg-[#24263A] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
       <div className="flex items-center">
         <div className="p-2 pl-0">
           <CustomImage src="/charge.png" width={32} height={32} alt="App Icon" />
@@ -70,13 +71,17 @@ const ChargingCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChang
         <div className="w-1/2">
           <div className="mt-4">
             <p className="font-normal text-xl text-[#A3A3A3]">今日广告充电</p>
-            <p className="text-white text-3xl mt-4">{todayCount}</p>
+            <p className="text-white text-3xl mt-4">
+              <CountUp start={0} end={Number(todayCount)} />
+            </p>
           </div>
         </div>
 
         <div className="mt-4 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">总充电次数</p>
-          <p className="text-white text-3xl mt-4 ">{totalCount}</p>
+          <p className="text-white text-3xl mt-4 ">
+            <CountUp start={0} end={Number(totalCount)} />
+          </p>
         </div>
       </div>
 
@@ -91,12 +96,16 @@ const ChargingCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChang
       <div className='flex justify-center items-center'>
         <div className="w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">今日广告充电</p>
-          <p className="text-white text-3xl mt-4 ">{todayCount}</p>
+          <p className="text-white text-3xl mt-4 ">
+            <CountUp start={0} end={Number(todayCount)} />
+          </p>
         </div>
 
         <div className="mt-4 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">总充电次数</p>
-          <p className="text-white text-3xl mt-4 ">{totalCount}</p>
+          <p className="text-white text-3xl mt-4 ">
+            <CountUp start={0} end={Number(totalCount)} />
+          </p>
         </div>
       </div>
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import CustomImage from '@/components/CustomImage';
 import CustomLineChart from '@/components/CustomLineChart'
-
+import CountUp from 'react-countup';
 
 const AppUsageCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChange }) => {
 
@@ -69,11 +69,15 @@ const AppUsageCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChang
       <div className='flex justify-center items-center'>
         <div className="mt-4 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">今日新增打开次数</p>
-          <p className="text-white text-3xl">{todayCount}</p>
+          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
+            <CountUp start={0} end={Number(todayCount)} />
+          </p>
         </div>
         <div className="mt-2 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">总打开次数</p>
-          <p className="text-white text-3xl">{totalCount}</p>
+          <p className="text-white text-3xl">
+            <CountUp start={0} end={Number(totalCount)} />
+          </p>
         </div>
       </div>
 

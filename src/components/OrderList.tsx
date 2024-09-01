@@ -3,23 +3,31 @@ import CustomImage from '@/components/CustomImage';
 
 const OrderList = ({ orders }) => {
   const listRef = useRef(null);
+  const scrollRef = useRef(null);
 
   useEffect(() => {
     const listElement = listRef.current;
+    const scrollElement = scrollRef.current;
     let scrollInterval;
 
-    if (listElement) {
-      // 每 2 秒自动滚动一次
+    if (listElement && scrollElement) {
+      // 每2秒平滑滚动一条数据的高度
       scrollInterval = setInterval(() => {
         const scrollHeight = listElement.scrollHeight;
-        const clientHeight = listElement.clientHeight;
-        const scrollTop = listElement.scrollTop;
+        const clientHeight = scrollElement.clientHeight;
+        const scrollTop = scrollElement.scrollTop;
         const itemHeight = listElement.firstChild ? listElement.firstChild.clientHeight : 0;
 
         if (scrollTop + clientHeight >= scrollHeight) {
-          listElement.scrollTop = 0; // 滚动到顶部
+          scrollElement.scrollTop = 0; // 滚动到顶部
         } else {
-          listElement.scrollTop += itemHeight; // 向下滚动一条数据的高度
+          scrollElement.style.transition = 'transform 0.5s ease-in-out';
+          scrollElement.style.transform = `translateY(-${itemHeight}px)`;
+          setTimeout(() => {
+            scrollElement.style.transition = '';
+            scrollElement.style.transform = '';
+            scrollElement.scrollTop += itemHeight;
+          }, 500);
         }
       }, 2000);
     }
@@ -38,7 +46,7 @@ const OrderList = ({ orders }) => {
       </div>
       <div className="mt-4">
         <div className="flex items-center justify-between mb-2 p-2
-         w-[779px] h-[38px] bg-[#EFEFEF] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
+         w-full h-[38px] bg-[#EFEFEF] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
           <div className="flex items-end justify-end">
             <span className="ml-[55px]
             font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A]">用户</span>
@@ -48,20 +56,24 @@ const OrderList = ({ orders }) => {
           <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A] mr-[38px]">结束时间</span>
         </div>
       </div>
-      <div className="overflow-y-auto max-h-64 scrollbar-hide" ref={listRef}>
-        {orders.map((order, index) => (
-          <div key={index} className="flex items-center justify-between mb-2 p-2
-          font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-sm text-[#FFFFFF]
-          rounded-lg">
-            <div className="flex items-center">
-              <img src={'/userIcon.png'} alt="User" className="w-8 h-8 rounded-full mr-2" />
-              <p className="text-white">{order.user}</p>
-            </div>
-            <p className="text-gray-400">{order.location}</p>
-            <p className="text-gray-400">{order.startTime}</p>
-            <p className="text-gray-400">{order.endTime}</p>
+      <div className="overflow-hidden max-h-64 scrollbar-hide mt-6 relative">
+        <div ref={scrollRef} className="overflow-hidden max-h-64">
+          <div ref={listRef}>
+            {orders.map((order, index) => (
+              <div key={index} className="flex items-center justify-between mb-2 p-2
+              font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-sm text-[#FFFFFF]
+              rounded-lg">
+                <div className="flex items-center">
+                  <img src={'/userIcon.png'} alt="User" className="w-8 h-8 rounded-full mr-2" />
+                  <p className="text-white">{order.user}</p>
+                </div>
+                <p className="text-gray-400">{order.location}</p>
+                <p className="text-gray-400">{order.startTime}</p>
+                <p className="text-gray-400">{order.endTime}</p>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
 import React from 'react';
 import CustomLineChart from '@/components/CustomLineChart'
 import CustomImage from '@/components/CustomImage';
+import CountUp from 'react-countup';
+
 
 const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCount, dailyStat, dailyStatChange }) => {
   const data = {
@@ -57,7 +59,7 @@ const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCo
   return (
     <div className="p-6   w-[463px] h-[552px]   bg-[#24263A] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
       <div className="flex items-center">
-      <div className="p-2 pl-0">
+        <div className="p-2 pl-0">
           <CustomImage src="/equip.png" width={32} height={32} alt="App Icon" />
         </div>
         <h2 className=" text-white text-xl">{title}</h2>
@@ -66,22 +68,30 @@ const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCo
       <div className='flex justify-center items-center'>
         <div className="mt-4 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">在线设备</p>
-          <p className="text-white text-3xl">{onlineCount}</p>
+          <p className="text-white text-3xl">
+            <CountUp start={0} end={Number(onlineCount)} />
+          </p>
         </div>
         <div className="mt-2 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">离线设备</p>
-          <p className="text-white text-3xl">{offlineCount}</p>
+          <p className="text-white text-3xl">
+            <CountUp start={0} end={Number(offlineCount)} />
+          </p>
         </div>
       </div>
 
       <div className='flex justify-center items-center'>
         <div className="mt-2 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">充电中设备</p>
-          <p className="text-white text-3xl">{chargingCount}</p>
+          <p className="text-white text-3xl">
+            <CountUp start={0} end={Number(chargingCount)} />
+          </p>
         </div>
         <div className="mt-2 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">空闲设备</p>
-          <p className="text-white text-3xl">{idleCount}</p>
+          <p className="text-white text-3xl">
+            <CountUp start={0} end={Number(idleCount)} />
+          </p>
         </div>
       </div>
       <div className="mt-4 flex justify-center w-[160px] h-[40px] bg-[#106AF1] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] ">
