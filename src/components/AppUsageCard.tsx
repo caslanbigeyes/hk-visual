@@ -73,9 +73,9 @@ const AppUsageCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChang
             <CountUp start={0} end={Number(todayCount)} />
           </p>
         </div>
-        <div className="mt-2 w-1/2">
+        <div className="mt-4 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">总打开次数</p>
-          <p className="text-white text-3xl">
+          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
             <CountUp start={0} end={Number(totalCount)} />
           </p>
         </div>

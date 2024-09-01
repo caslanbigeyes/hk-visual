@@ -72,6 +72,21 @@ const NetworkCard = ({ title, dailyData, dailyState, dailyStatChange, yesterdayD
     },
   };
 
+
+  const getBackgroundColor = (index) => {
+    switch (index) {
+      case 0:
+        return '#FFA857';
+      case 1:
+        return '#508790';
+      case 2:
+        return '#B96245';
+      default:
+        return '#ABAECC';
+    }
+  };
+
+
   return (
     <div ref={containerRef} className="p-6 bg-[#24263A] w-[841px] h-[479px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
       <div className="flex items-center">
@@ -89,11 +104,19 @@ const NetworkCard = ({ title, dailyData, dailyState, dailyStatChange, yesterdayD
           {dataTemp.slice(0, 5).map((loc, index) => (
             <div key={index} className="flex items-center justify-between mb-2">
               <div className="flex items-center w-1/2">
-                <span className="text-white mr-2">{index + 1}</span>
-                <span className="text-white">{loc.name}</span>
+                <div
+                  className="mr-2 w-[24px] h-[24px] flex justify-center items-center text-[#000] rounded-[50%]"
+                  style={{ backgroundColor: getBackgroundColor(index) }}
+                >
+                  {index + 1}
+                </div>
+                <span className="text-white  truncate">{loc.name}</span>
               </div>
               <div className="w-1/2 bg-[linear-gradient(360deg,#5C4F8E_0%,#668DE0_30%,#10D3F1_100%)] rounded-full h-4 overflow-hidden">
-                <div className="bg-[linear-gradient(360deg,#5C4F8E_0%,#668DE0_30%,#10D3F1_100%)] rounded-full h-4" style={{ width: `${(loc.value / 1600) * 100}%` }}></div>
+                <div
+                  className="bg-[linear-gradient(360deg,#5C4F8E_0%,#668DE0_30%,#10D3F1_100%)] rounded-full h-4"
+                  style={{ width: `${(loc.value / 1600) * 100}%` }}
+                ></div>
               </div>
             </div>
           ))}
@@ -102,11 +125,19 @@ const NetworkCard = ({ title, dailyData, dailyState, dailyStatChange, yesterdayD
           {dataTemp.slice(5, 10).map((loc, index) => (
             <div key={index + 5} className="flex items-center justify-between mb-2">
               <div className="flex items-center w-1/2">
-                <span className="text-white mr-2">{index + 6}</span>
-                <span className="text-white">{loc.name}</span>
+                <div
+                  className="mr-2 w-[24px] h-[24px] flex justify-center items-center text-[#000] rounded-[50%]"
+                  style={{ backgroundColor: getBackgroundColor(index + 5) }}
+                >
+                  {index + 6}
+                </div>
+                <span className="text-white  truncate">{loc.name}</span>
               </div>
               <div className="w-1/2 bg-[linear-gradient(360deg,#5C4F8E_0%,#668DE0_30%,#10D3F1_100%)] rounded-full h-4 overflow-hidden">
-                <div className="bg-[linear-gradient(360deg,#5C4F8E_0%,#668DE0_30%,#10D3F1_100%)] rounded-full h-4" style={{ width: `${(loc.value / 1600) * 100}%` }}></div>
+                <div
+                  className="bg-[linear-gradient(360deg,#5C4F8E_0%,#668DE0_30%,#10D3F1_100%)] rounded-full h-4"
+                  style={{ width: `${(loc.value / 1600) * 100}%` }}
+                ></div>
               </div>
             </div>
           ))}

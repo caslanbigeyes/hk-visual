@@ -71,7 +71,7 @@ const ChargingCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChang
         <div className="w-1/2">
           <div className="mt-4">
             <p className="font-normal text-xl text-[#A3A3A3]">今日广告充电</p>
-            <p className="text-white text-3xl mt-4">
+            <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
               <CountUp start={0} end={Number(todayCount)} />
             </p>
           </div>
@@ -79,7 +79,7 @@ const ChargingCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChang
 
         <div className="mt-4 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">总充电次数</p>
-          <p className="text-white text-3xl mt-4 ">
+          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
             <CountUp start={0} end={Number(totalCount)} />
           </p>
         </div>
@@ -96,14 +96,14 @@ const ChargingCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChang
       <div className='flex justify-center items-center'>
         <div className="w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">今日广告充电</p>
-          <p className="text-white text-3xl mt-4 ">
+          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
             <CountUp start={0} end={Number(todayCount)} />
           </p>
         </div>
 
         <div className="mt-4 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">总充电次数</p>
-          <p className="text-white text-3xl mt-4 ">
+          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
             <CountUp start={0} end={Number(totalCount)} />
           </p>
         </div>

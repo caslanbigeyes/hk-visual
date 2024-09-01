@@ -68,13 +68,13 @@ const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCo
       <div className='flex justify-center items-center'>
         <div className="mt-4 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">在线设备</p>
-          <p className="text-white text-3xl">
+          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
             <CountUp start={0} end={Number(onlineCount)} />
           </p>
         </div>
         <div className="mt-2 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">离线设备</p>
-          <p className="text-white text-3xl">
+          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
             <CountUp start={0} end={Number(offlineCount)} />
           </p>
         </div>
@@ -83,13 +83,13 @@ const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCo
       <div className='flex justify-center items-center'>
         <div className="mt-2 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">充电中设备</p>
-          <p className="text-white text-3xl">
+          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
             <CountUp start={0} end={Number(chargingCount)} />
           </p>
         </div>
         <div className="mt-2 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">空闲设备</p>
-          <p className="text-white text-3xl">
+          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
             <CountUp start={0} end={Number(idleCount)} />
           </p>
         </div>
