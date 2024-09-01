@@ -101,7 +101,7 @@ const NetworkCard = ({ title, dailyData, dailyState, dailyStatChange, yesterdayD
 
       <div className="mt-4 grid grid-cols-2 gap-4">
         <div>
-          {dataTemp.slice(0, 5).map((loc, index) => (
+          {dataTemp?.slice(0, 5).map((loc, index) => (
             <div key={index} className="flex items-center justify-between mb-2">
               <div className="flex items-center w-1/2">
                 <div
@@ -122,7 +122,7 @@ const NetworkCard = ({ title, dailyData, dailyState, dailyStatChange, yesterdayD
           ))}
         </div>
         <div>
-          {dataTemp.slice(5, 10).map((loc, index) => (
+          {dataTemp?.slice(5, 10).map((loc, index) => (
             <div key={index + 5} className="flex items-center justify-between mb-2">
               <div className="flex items-center w-1/2">
                 <div

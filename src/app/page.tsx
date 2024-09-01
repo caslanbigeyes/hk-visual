@@ -36,7 +36,7 @@ const Home = () => {
   useEffect(() => {
     // 1分钟调用一次接口 fetch
     const intervalId = setInterval(() => {
-      fetch('/api/screen/detaile', {
+      fetch('http://1ee51385ri68.vicp.fun:29833/api/screen/detaile', {
         headers: { 'x-client': '1' }
       })
         .then(res => res.json())
@@ -51,7 +51,7 @@ const Home = () => {
     }, 60000);
 
     // 初次加载时调用接口
-    fetch('/api/screen/detaile', {
+    fetch('http://1ee51385ri68.vicp.fun:29833/api/screen/detaile', {
       headers: { 'x-client': '1' }
     })
       .then(res => res.json())
@@ -211,8 +211,13 @@ const Home = () => {
   const appUsageCardData = data ? getAppUsageCardData(data) : mockData.appUsage;
 
   return (
-    <div className='h-full w-full bg-custom-bg'>
-      <div className="screen bg-gray-900 min-h-screen min-w-screen m-l-[52px] m-r-[52px] m-t-[24px] m-b-[24px] 
+    <div className='bg-custom-bg
+      bg-cover bg-center bg-no-repeat
+      h-screen w-screen
+     pl-[52px] pr-[52px] pt-[24px] pb-[24px] 
+    '>
+      <div className="screen min-h-screen min-w-screen 
+       
        inline-block  absolute left-2/4 origin-[0_0]"id="screen">
         <div className="grid grid-cols-1 lg:grid-cols-[463px_841px_463px] gap-6">
           <div className="flex flex-col gap-6">
