@@ -76,7 +76,7 @@ const CustomLineChart = ({ data, options, parentWidth = 244, parentHeight }) => 
             <div>
                 <div className="text-white text-5xl font-bold">{currentValue}K</div>
                 <div className="text-[#F19CFF] text-lg font-semibold mt-2 flex justify-start items-center">
-                    <CustomImage src='/arrowTop.png' width={6} height={10} />
+                    <CustomImage alt={'logo'} src='/arrowTop.png' width={6} height={10} />
                     <div className='ml-[5px] text-[16px] font-bold'> 11.94%</div>
                 </div>
             </div>
