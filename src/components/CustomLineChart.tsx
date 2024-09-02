@@ -81,7 +81,7 @@ const CustomLineChart = ({ data, options, parentWidth = 244, parentHeight }) => 
                 </div>
             </div>
             <div className='ml-[24px]' style={{ width: parentWidth, maxHeight: parentHeight }}>
-                <Line data={data} options={customOptions} width={parentWidth} height={parentHeight} />
+                <Line data={data} options={customOptions} width={parentWidth} />
             </div>
         </div>
     );

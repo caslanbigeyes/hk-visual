@@ -13,7 +13,7 @@ const NetworkCard = ({ title, dailyData, dailyState, dailyStatChange, yesterdayD
 
   useEffect(() => {
     if (containerRef.current) {
-      setContainerWidth(containerRef.current.offsetWidth);
+      setContainerWidth(containerRef.current.offsetWidth-244);
       const otherElementsHeight = Array.from(containerRef.current.children)
         .reduce((total, child) => total + child.offsetHeight, 0);
       setContainerHeight(containerRef.current.offsetHeight - otherElementsHeight);
