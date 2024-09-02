@@ -88,7 +88,7 @@ const NetworkCard = ({ title, dailyData, dailyState, dailyStatChange, yesterdayD
 
 
   return (
-    <div ref={containerRef} className="p-6 bg-[#24263A] w-[841px] h-[479px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
+    <div ref={containerRef} className="p-6 bg-[#24263A] w-[968px] h-[479px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
       <div className="flex items-center">
         <div className="p-2 pl-0">
           <CustomImage src="/net.png" width={32} height={32} alt="App Icon" />

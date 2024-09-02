@@ -57,7 +57,7 @@ const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCo
   };
 
   return (
-    <div className="p-6   w-[463px] h-[552px]   bg-[#24263A] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
+    <div className="p-6    h-[552px]   bg-[#24263A] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
       <div className="flex items-center">
         <div className="p-2 pl-0">
           <CustomImage src="/equip.png" width={32} height={32} alt="App Icon" />
