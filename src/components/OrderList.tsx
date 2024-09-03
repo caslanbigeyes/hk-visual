@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import CustomImage from '@/components/CustomImage';
 
-const OrderList = ({ orders }) => {
+const OrderList = ({ initialOrders }) => {
+  const [orders, setOrders] = useState(initialOrders);
   const listRef = useRef(null);
   const scrollRef = useRef(null);
 
@@ -15,10 +16,9 @@ const OrderList = ({ orders }) => {
       scrollInterval = setInterval(() => {
         const scrollHeight = listElement.scrollHeight;
         const clientHeight = scrollElement.clientHeight;
-        const scrollTop = scrollElement.scrollTop;
         const itemHeight = listElement.firstChild ? listElement.firstChild.clientHeight : 0;
 
-        if (scrollTop + clientHeight >= scrollHeight) {
+        if (scrollElement.scrollTop >= scrollHeight) {
           scrollElement.scrollTop = 0; // 滚动到顶部
         } else {
           scrollElement.style.transition = 'transform 0.5s ease-in-out';
@@ -35,6 +35,12 @@ const OrderList = ({ orders }) => {
     // 清理滚动定时器
     return () => clearInterval(scrollInterval);
   }, [orders]);
+
+  useEffect(() => {
+   if(initialOrders?.length){
+    setOrders(prevOrders => [...prevOrders, ...initialOrders]);
+   }
+  }, []);
 
   return (
     <div className="p-6 h-[421px] bg-[#24263A] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
@@ -57,9 +63,9 @@ const OrderList = ({ orders }) => {
         </div>
       </div>
       <div className="overflow-hidden max-h-64 scrollbar-hide mt-6 relative">
-        <div ref={scrollRef} className="overflow-hidden max-h-64">
+        <div ref={scrollRef} className="overflow-hidden max-h-64 relative">
           <div ref={listRef}>
-            {orders.map((order, index) => (
+            {orders?.map((order, index) => (
               <div key={index} className="flex items-center justify-between mb-2 p-2
               font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-sm text-[#FFFFFF]
               rounded-lg">
