@@ -5,7 +5,7 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
-const NetworkCard = ({ title, dailyData, dailyState, dailyStatChange, yesterdayData }) => {
+const NetworkCard = ({ title, dailyData, dailyStat, dailyStatChange, yesterdayData }) => {
   const [activeData, setActiveData] = useState('daily');
   const containerRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -13,7 +13,7 @@ const NetworkCard = ({ title, dailyData, dailyState, dailyStatChange, yesterdayD
 
   useEffect(() => {
     if (containerRef.current) {
-      setContainerWidth(containerRef.current.offsetWidth-244);
+      setContainerWidth(containerRef.current.offsetWidth - 244);
       const otherElementsHeight = Array.from(containerRef.current.children)
         .reduce((total, child) => total + child.offsetHeight, 0);
       setContainerHeight(containerRef.current.offsetHeight - otherElementsHeight);
@@ -22,11 +22,15 @@ const NetworkCard = ({ title, dailyData, dailyState, dailyStatChange, yesterdayD
 
   let dataTemp = activeData === 'daily' ? dailyData : yesterdayData;
   let data = {
-    labels: ['10', '11', '12', '13', '14', '15', '16', '17'],
+    labels: Array.isArray(dailyStat) && dailyStat.length && dailyStat.map(i => {
+      const date = new Date(i.dateDay);
+      const day = date.getDate().toString(); // 获取日期的日部分并转换为字符串
+      return day
+    }) || [],
     datasets: [
       {
         label: '每日新增用户数',
-        data: [500, 600, 800, 1000, 1200, 1400, 1800, 2000],
+        data: Array.isArray(dailyStat) && dailyStat.length && dailyStat.map(i => i.count) || [],
         borderColor: '#9b5de5',
         backgroundColor: 'rgba(155, 93, 229, 0.2)',
         fill: true,
@@ -112,10 +116,10 @@ const NetworkCard = ({ title, dailyData, dailyState, dailyStatChange, yesterdayD
                 </div>
                 <span className="text-white  truncate">{loc.name}</span>
               </div>
-              <div className="w-1/2 bg-[linear-gradient(360deg,#5C4F8E_0%,#668DE0_30%,#10D3F1_100%)] rounded-full h-4 overflow-hidden">
+              <div className="w-1/2 bg-[#1D1E2C] rounded-full h-4 overflow-hidden">
                 <div
                   className="bg-[linear-gradient(360deg,#5C4F8E_0%,#668DE0_30%,#10D3F1_100%)] rounded-full h-4"
-                  style={{ width: `${(loc.value / 1600) * 100}%` }}
+                  style={{ width: `${loc.value }%` }}
                 ></div>
               </div>
             </div>
@@ -133,10 +137,10 @@ const NetworkCard = ({ title, dailyData, dailyState, dailyStatChange, yesterdayD
                 </div>
                 <span className="text-white  truncate">{loc.name}</span>
               </div>
-              <div className="w-1/2 bg-[linear-gradient(360deg,#5C4F8E_0%,#668DE0_30%,#10D3F1_100%)] rounded-full h-4 overflow-hidden">
+              <div className="w-1/2 bg-[#1D1E2C]  rounded-full h-4 overflow-hidden">
                 <div
                   className="bg-[linear-gradient(360deg,#5C4F8E_0%,#668DE0_30%,#10D3F1_100%)] rounded-full h-4"
-                  style={{ width: `${(loc.value / 1600) * 100}%` }}
+                  style={{ width: `${loc.value }%` }}
                 ></div>
               </div>
             </div>
@@ -151,7 +155,7 @@ const NetworkCard = ({ title, dailyData, dailyState, dailyStatChange, yesterdayD
       </div>
 
       <div className='flex w-full mt-[20px]'>
-        <CustomLineChart data={data} options={options} parentWidth={containerWidth} parentHeight={150} />
+        <CustomLineChart todayCount={dailyStat?.length&&dailyStat[0].count} data={data} options={options} parentWidth={containerWidth} parentHeight={150} />
       </div>
     </div>
   );

@@ -41,6 +41,7 @@ const Home = () => {
       })
         .then(res => res.json())
         .then(data => {
+
           if (data.code === 0) {
             setData(data.data);
           }
@@ -55,9 +56,10 @@ const Home = () => {
       headers: { 'x-client': '1' }
     })
       .then(res => res.json())
-      .then(data => {
-        if (data.code === 0) {
-          setData(data.data);
+      .then(res => {
+
+        if (res.code === 0) {
+          setData(res.data);
         }
       })
       .catch(() => {
@@ -84,23 +86,7 @@ const Home = () => {
       dailyStat: '13600',
       dailyStatChange: '11.94%',
     },
-    orders: [
-      { user: '123****1234', userImage: '/user1.png', location: '湖南省长沙市', startTime: '2034/03/27 17:57', endTime: '2034/03/27 17:57' },
-      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
-      { user: '123****1234', userImage: '/user1.png', location: '湖南省长沙市', startTime: '2034/03/27 17:57', endTime: '2034/03/27 17:57' },
-      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
-      { user: '123****1234', userImage: '/user1.png', location: '湖南省长沙市', startTime: '2034/03/27 17:57', endTime: '2034/03/27 17:57' },
-      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
-      { user: '123****1234', userImage: '/user1.png', location: '湖南省长沙市', startTime: '2034/03/27 17:57', endTime: '2034/03/27 17:57' },
-      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
-      { user: '123****1234', userImage: '/user1.png', location: '湖南省长沙市', startTime: '2034/03/27 17:57', endTime: '2034/03/27 17:57' },
-      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
-      { user: '123****1234', userImage: '/user1.png', location: '湖南省长沙市', startTime: '2034/03/27 17:57', endTime: '2034/03/27 17:57' },
-      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
-      { user: '123****1234', userImage: '/user1.png', location: '湖南省长沙市', startTime: '2034/03/27 17:57', endTime: '2034/03/27 17:57' },
-      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },
-      { user: '123****1234', userImage: '/user1.png', location: '湖南省长沙市', startTime: '2034/03/27 17:57', endTime: '2034/03/27 17:57' },
-      { user: '123****1234', userImage: '/user2.png', location: '山东省济南市', startTime: '2035/05/14 07:16', endTime: '2035/05/14 07:16' },    ],
+    orders: [],
     network: {
       title: '网点',
       dailyState: '1600',
@@ -150,7 +136,7 @@ const Home = () => {
     title: '用户',
     todayCount: data.accountCount,
     totalCount: data.accountTotalcount,
-    dailyStat: data?.accountScreenDTOList||[],
+    dailyStat: data?.accountScreenDTOList || [],
     dailyStatChange: '11.94%', // 需要根据实际情况调整
   });
 
@@ -160,21 +146,24 @@ const Home = () => {
     offlineCount: data?.deviceScreenDTO?.countOffline,
     chargingCount: data?.deviceScreenDTO?.countCharge,
     idleCount: data?.deviceScreenDTO?.countIdle,
-    dailyStat: data?.deviceAddScreenDTOList?.map(item => item.count),
+    dailyStat: data?.deviceAddScreenDTOList || [],
     dailyStatChange: '11.94%', // 需要根据实际情况调整
   });
 
-  const getOrderListData = (data) => data?.orderScreenDTOList?.map(order => ({
-    user: order.name,
-    userImage: '/user1.png', // 假设所有用户使用相同的图像
-    location: order.address,
-    startTime: new Date(order.timeBegin).toLocaleString(),
-    endTime: new Date(order.timeEnd).toLocaleString(),
-  }));
+  const getOrderListData = (data) => data?.orderScreenDTOList?.map(order => {
+    return {
+      user: order.name,
+      userImage: '/user1.png', // 假设所有用户使用相同的图像
+      location: order.address,
+      startTime: new Date(order.timeBegin).toLocaleString(),
+      endTime: new Date(order.timeEnd).toLocaleString(),
+    }
+  });
+
 
   const getNetworkCardData = (data) => ({
     title: '网点',
-    dailyState: data?.networkAddScreenDTOList?.map(item => item.count).join(', '),
+    dailyStat: data?.networkAddScreenDTOList || [],
     dailyStatChange: '18%', // 需要根据实际情况调整
     dailyData: data?.networkScreenDTOList?.map(item => ({
       name: item.name,
@@ -190,7 +179,7 @@ const Home = () => {
     title: '充电',
     todayCount: data.chargeCount,
     totalCount: data.chargeTotalcount,
-    dailyStat: data?.chargeScreenDTOList?.map(item => item.chargeCount).join(', '),
+    dailyStat: data?.chargeScreenDTOList||[],
     dailyStatChange: '11.94%', // 需要根据实际情况调整
   });
 
@@ -198,7 +187,7 @@ const Home = () => {
     title: 'App 使用情况',
     todayCount: data.appCount,
     totalCount: data.appTotalcount,
-    dailyStat: data?.appScreenDTOList||[],
+    dailyStat: data?.appScreenDTOList || [],
     dailyStatChange: '11.94%', // 需要根据实际情况调整
   });
 
@@ -237,7 +226,7 @@ const Home = () => {
               </div>
             </div>
             <NetworkCard {...networkCardData} />
-            <OrderList orders={orderListData} />
+            <OrderList order={orderListData} />
           </div>
 
           <div className="flex flex-col gap-6">

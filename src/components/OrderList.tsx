@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import CustomImage from '@/components/CustomImage';
 
-const OrderList = ({ initialOrders }) => {
-  const [orders, setOrders] = useState(initialOrders);
+const OrderList = ({ order }) => {
+  const [orders, setOrders] = useState(order);
   const listRef = useRef(null);
   const scrollRef = useRef(null);
-
   useEffect(() => {
     const listElement = listRef.current;
     const scrollElement = scrollRef.current;
@@ -37,10 +36,10 @@ const OrderList = ({ initialOrders }) => {
   }, [orders]);
 
   useEffect(() => {
-   if(initialOrders?.length){
-    setOrders(prevOrders => [...prevOrders, ...initialOrders]);
+   if(order?.length){
+    setOrders(prevOrders => [...prevOrders, ...order]);
    }
-  }, []);
+  }, [order?.length]);
 
   return (
     <div className="p-6 h-[421px] bg-[#24263A] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
@@ -53,8 +52,8 @@ const OrderList = ({ initialOrders }) => {
       <div className="mt-4">
         <div className="flex items-center justify-between mb-2 p-2
          w-full h-[38px] bg-[#EFEFEF] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
-          <div className="flex items-end justify-end">
-            <span className="ml-[55px]
+          <div className="flex items-start justify-end">
+            <span className="ml-[22px]
             font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A]">用户</span>
           </div>
           <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A]">网点</span>

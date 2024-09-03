@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CustomLineChart from '@/components/CustomLineChart'
 import CustomImage from '@/components/CustomImage';
 import CountUp from 'react-countup';
 
 
 const ChargingCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChange }) => {
+  const [activeButton, setActiveButton] = useState('chargeCount');
+
+  const handleButtonClick = (buttonType) => {
+    setActiveButton(buttonType);
+  };
 
   const data = {
-    labels: ['10', '11', '12', '13', '14', '15', '16', '17'],
+    labels: Array.isArray(dailyStat) && dailyStat.length ? dailyStat.map(i => {
+      const date = new Date(i.dateDay);
+      const day = date.getDate().toString(); // 获取日期的日部分并转换为字符串
+      return day;
+    }) : [],
     datasets: [
       {
-        label: '每日新增用户数',
-        data: [500, 600, 800, 1000, 1200, 1400, 1800, 2000],
+        label: activeButton === 'income' ? '总充电次数' : activeButton === 'chargeCount' ? '每日广告充电次数' : '每日付费充电次数',
+        data: Array.isArray(dailyStat) && dailyStat.length ? dailyStat.map(i => i[activeButton]) : [],
         borderColor: '#106AF1',
         backgroundColor: 'rgba(155, 93, 229, 0.2)',
         fill: true,
@@ -112,24 +121,30 @@ const ChargingCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChang
 
 
       <div className='flex'>
-        <div className="flex items-center justify-center mt-4  p-3
-      h-[40px] bg-[#1CB362] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px]">
+        <button
+          className={`flex items-center justify-center mt-4 p-3 h-[40px] ${activeButton === 'chargeCount' ? 'bg-[#1CB362]' : 'bg-[#3C4050]'} rounded-[10px]`}
+          onClick={() => handleButtonClick('chargeCount')}
+        >
           每日广告充电
-        </div>
-        <div className="flex items-center justify-center mt-4  ml-4  p-3
-         h-[40px] bg-[#1CB362] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px]">
+        </button>
+        <button
+          className={`flex items-center justify-center mt-4 ml-4 p-3 h-[40px] ${activeButton === 'incomeCount' ? 'bg-[#1CB362]' : 'bg-[#3C4050]'} rounded-[10px]`}
+          onClick={() => handleButtonClick('incomeCount')}
+        >
           每日付费充电
-        </div>
-        <div className="flex items-center justify-center mt-4  ml-4  p-3
-        h-[40px] bg-[#1CB362] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px]">
+        </button>
+        <button
+          className={`flex items-center justify-center mt-4 ml-4 p-3 h-[40px] ${activeButton === 'income' ? 'bg-[#1CB362]' : 'bg-[#3C4050]'} rounded-[10px]`}
+          onClick={() => handleButtonClick('income')}
+        >
           总充电
-        </div>
+        </button>
       </div>
 
 
 
       <div className='flex w-[400px] mt-[20px]'>
-        <CustomLineChart data={data} options={options} />
+        <CustomLineChart data={data} todayCount={dailyStat?.length&&dailyStat.map(i => i[activeButton])[0]} options={options} />
       </div>
 
     </div>

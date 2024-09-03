@@ -6,11 +6,15 @@ import CountUp from 'react-countup';
 
 const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCount, dailyStat, dailyStatChange }) => {
   const data = {
-    labels: ['10', '11', '12', '13', '14', '15', '16', '17'],
+    labels: Array.isArray(dailyStat) && dailyStat.length && dailyStat.map(i => {
+      const date = new Date(i.dateDay);
+      const day = date.getDate().toString(); // 获取日期的日部分并转换为字符串
+      return day
+    }) || [],
     datasets: [
       {
         label: '每日新增用户数',
-        data: [500, 600, 800, 1000, 1200, 1400, 1800, 2000],
+        data: Array.isArray(dailyStat) && dailyStat.length && dailyStat.map(i => i.count) || [],
         borderColor: '#106AF1',
         backgroundColor: 'rgba(155, 93, 229, 0.2)',
         fill: true,
@@ -72,7 +76,7 @@ const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCo
             <CountUp start={0} end={Number(onlineCount)} />
           </p>
         </div>
-        <div className="mt-2 w-1/2">
+        <div className="mt-4 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">离线设备</p>
           <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
             <CountUp start={0} end={Number(offlineCount)} />
@@ -102,7 +106,7 @@ const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCo
       </div>
 
       <div className='flex w-[400px] mt-[20px]'>
-        <CustomLineChart data={data} options={options} />
+        <CustomLineChart todayCount={dailyStat?.length&&dailyStat[0].count} data={data} options={options} />
       </div>
     </div>
   );

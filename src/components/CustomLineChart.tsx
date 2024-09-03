@@ -5,10 +5,10 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-const CustomLineChart = ({ data, options, parentWidth = 244, parentHeight }) => {
+const CustomLineChart = ({ data, options, todayCount, parentWidth = 244, parentHeight }) => {
+    console.log(todayCount, 'todayCount');
     const [currentValue, setCurrentValue] = useState(data.datasets[0].data.slice(-1)[0]);
     const [currentLabel, setCurrentLabel] = useState(data.labels.slice(-1)[0]);
-    console.log(data.datasets[0].data.slice(-1)[0], data.labels.slice(-1)[0], 33334444, currentValue, currentLabel)
 
     const chartRef = useRef(null);
 
@@ -83,10 +83,10 @@ const CustomLineChart = ({ data, options, parentWidth = 244, parentHeight }) => 
     return (
         <div className="bg-[#24263A] flex w-full">
             <div>
-                <div className="text-white text-5xl font-bold">{currentValue}K</div>
+                <div className="text-white text-5xl font-bold">{(Number(todayCount) / 1000) > 0 ? (Number(todayCount) / 1000) + 'K' : 0}</div>
                 <div className="text-[#F19CFF] text-lg font-semibold mt-2 flex justify-start items-center">
                     <CustomImage alt={'logo'} src='/arrowTop.png' width={6} height={10} />
-                    <div className='ml-[5px] text-[16px] font-bold'> 11.94%</div>
+                    <div className='ml-[5px] text-[16px] font-bold'> 0%</div>
                 </div>
             </div>
             <div className='ml-[24px]' style={{ width: parentWidth, maxHeight: parentHeight }}>

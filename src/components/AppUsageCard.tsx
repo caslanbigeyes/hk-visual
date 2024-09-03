@@ -4,17 +4,17 @@ import CustomLineChart from '@/components/CustomLineChart'
 import CountUp from 'react-countup';
 
 const AppUsageCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChange }) => {
-  console.log(dailyStat, 'dailyStat')
-  const convertTimestamp = (timestamp) => {
-    const date = new Date(parseInt(timestamp, 10) * 1000); // 将秒转换为毫秒
-    return date.toLocaleString(); // 使用本地时间格式
-  };
+
   const data = {
-    labels: dailyStat.length ? dailyStat.map(i => i.dateDay) : [],
+    labels: Array.isArray(dailyStat) && dailyStat.length && dailyStat.map(i => {
+      const date = new Date(i.dateDay);
+      const day = date.getDate().toString(); // 获取日期的日部分并转换为字符串
+      return day
+    }) || [],
     datasets: [
       {
         label: '每日新增用户数',
-        data: dailyStat.length ? dailyStat.map(i => i.count) : [],
+        data: Array.isArray(dailyStat) && dailyStat.length && dailyStat.map(i => i.count) || [],
         borderColor: '#106AF1',
         backgroundColor: 'rgba(155, 93, 229, 0.2)',
         fill: true,
@@ -93,7 +93,7 @@ const AppUsageCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChang
       </div>
 
       <div className='flex w-[400px] mt-[20px]'>
-        <CustomLineChart data={data} options={options} />
+        <CustomLineChart todayCount={todayCount} data={data} options={options} />
       </div>
     </div>
   );
