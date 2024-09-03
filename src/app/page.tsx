@@ -36,7 +36,7 @@ const Home = () => {
   useEffect(() => {
     // 1分钟调用一次接口 fetch
     const intervalId = setInterval(() => {
-      fetch('http://1ee51385ri68.vicp.fun:29833/api/screen/detaile', {
+      fetch('http://116.62.17.146:1189/system/api/screen/detaile', {
         headers: { 'x-client': '1' }
       })
         .then(res => res.json())
@@ -51,7 +51,7 @@ const Home = () => {
     }, 60000);
 
     // 初次加载时调用接口
-    fetch('http://1ee51385ri68.vicp.fun:29833/api/screen/detaile', {
+    fetch('http://116.62.17.146:1189/system/api/screen/detaile', {
       headers: { 'x-client': '1' }
     })
       .then(res => res.json())
@@ -151,7 +151,7 @@ const Home = () => {
     title: '用户',
     todayCount: data.accountCount,
     totalCount: data.accountTotalcount,
-    dailyStat: data?.accountScreenDTOList?.map(item => item.count).join(', '),
+    dailyStat: data?.accountScreenDTOList?.map(item => item.count),
     dailyStatChange: '11.94%', // 需要根据实际情况调整
   });
 
@@ -161,7 +161,7 @@ const Home = () => {
     offlineCount: data?.deviceScreenDTO?.countOffline,
     chargingCount: data?.deviceScreenDTO?.countCharge,
     idleCount: data?.deviceScreenDTO?.countIdle,
-    dailyStat: data?.deviceAddScreenDTOList?.map(item => item.count).join(', '),
+    dailyStat: data?.deviceAddScreenDTOList?.map(item => item.count),
     dailyStatChange: '11.94%', // 需要根据实际情况调整
   });
 
@@ -199,7 +199,7 @@ const Home = () => {
     title: 'App 使用情况',
     todayCount: data.appCount,
     totalCount: data.appTotalcount,
-    dailyStat: data?.appScreenDTOList?.map(item => item.count).join(', '),
+    dailyStat: data?.appScreenDTOList,
     dailyStatChange: '11.94%', // 需要根据实际情况调整
   });
 
@@ -221,8 +221,8 @@ const Home = () => {
        inline-block  absolute left-2/4 origin-[0_0]"id="screen">
         <div className="grid grid-cols-1 lg:grid-cols-[483px_968px_483px] gap-6">
           <div className="flex flex-col gap-6">
-            <UserCard {...mockData.user} />
-            <ChargingCard {...mockData.charging} />
+            <UserCard {...userCardData} />
+            <ChargingCard {...chargingCardData} />
           </div>
 
           <div className="flex flex-col gap-6">
@@ -237,13 +237,13 @@ const Home = () => {
                 <div className='font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-xl text-[#B5B9DD]'>2024/08/20</div>
               </div>
             </div>
-            <NetworkCard {...mockData.network} />
-            <OrderList orders={mockData.orders} />
+            <NetworkCard {...networkCardData} />
+            <OrderList orders={orderListData} />
           </div>
 
           <div className="flex flex-col gap-6">
-            <EquipmentCard {...mockData.equipment} />
-            <AppUsageCard {...mockData.appUsage} />
+            <EquipmentCard {...equipmentCardData} />
+            <AppUsageCard {...appUsageCardData} />
           </div>
         </div>
       </div>

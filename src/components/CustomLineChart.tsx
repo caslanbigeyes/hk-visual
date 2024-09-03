@@ -8,6 +8,21 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 const CustomLineChart = ({ data, options, parentWidth = 244, parentHeight }) => {
     const [currentValue, setCurrentValue] = useState(data.datasets[0].data.slice(-1)[0]);
     const [currentLabel, setCurrentLabel] = useState(data.labels.slice(-1)[0]);
+    console.log(data.datasets[0].data.slice(-1)[0], data.labels.slice(-1)[0], 33334444, currentValue, currentLabel)
+
+    const chartRef = useRef(null);
+
+    useEffect(() => {
+        const chart = chartRef.current;
+        if (chart) {
+            const ctx = chart.ctx;
+            const gradient = ctx.createLinearGradient(0, 0, 0, chart.height);
+            gradient.addColorStop(0, 'rgba(123, 67, 151, 0.8)'); // #7B4397 with 0.8 opacity
+            gradient.addColorStop(1, 'rgba(123, 67, 151, 0)'); // #7B4397 with 0 opacity
+
+            data.datasets[0].backgroundColor = gradient;
+        }
+    }, [data]);
 
     const customOptions = {
         ...options,
@@ -31,13 +46,11 @@ const CustomLineChart = ({ data, options, parentWidth = 244, parentHeight }) => 
         scales: {
             x: {
                 grid: {
-                    // color: '#000',
                     borderDash: [5, 5], // 设置虚线
                     color: function (context) {
                         if (context.tick && context.tick.label === '10') {
                             return 'transparent'; // 去掉第一个 x 轴的竖线
                         }
-                        // return '#000';
                     },
                 },
                 ticks: {
@@ -47,18 +60,14 @@ const CustomLineChart = ({ data, options, parentWidth = 244, parentHeight }) => 
                     },
                 },
             },
-                y: {
-                    // grid: {
-                    //     color: '#000',
-                    //     borderDash: [5, 5], // 设置虚线
-                    // },
-                    ticks: {
-                        color: '#474C55',
-                        font: {
-                            size: 12,
-                        },
+            y: {
+                ticks: {
+                    color: '#474C55',
+                    font: {
+                        size: 12,
                     },
                 },
+            },
         },
         elements: {
             point: {
@@ -81,7 +90,7 @@ const CustomLineChart = ({ data, options, parentWidth = 244, parentHeight }) => 
                 </div>
             </div>
             <div className='ml-[24px]' style={{ width: parentWidth, maxHeight: parentHeight }}>
-                <Line data={data} options={customOptions} width={parentWidth} height={parentHeight} />
+                <Line ref={chartRef} data={data} options={customOptions} width={parentWidth} height={parentHeight} />
             </div>
         </div>
     );
