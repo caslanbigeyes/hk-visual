@@ -4,13 +4,13 @@ import CustomLineChart from '@/components/CustomLineChart';
 import CountUp from 'react-countup';
 
 const UserCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChange }) => {
-
+  console.log(dailyStat, 'dailyStat');
   const data = {
-    labels: ['10', '11', '12', '13', '14', '15', '16', '17'],
+    labels: Array.isArray(dailyStat) && dailyStat.length && dailyStat.map(i => i.dateDay) || [],
     datasets: [
       {
         label: '每日新增用户数',
-        data: [500, 600, 800, 1000, 1200, 1400, 1800, 2000],
+        data: Array.isArray(dailyStat) && dailyStat.length && dailyStat.map(i => i.count) || [],
         borderColor: '#9b5de5',
         backgroundColor: 'rgba(155, 93, 229, 0.2)',
         fill: true,

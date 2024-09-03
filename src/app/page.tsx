@@ -36,7 +36,7 @@ const Home = () => {
   useEffect(() => {
     // 1分钟调用一次接口 fetch
     const intervalId = setInterval(() => {
-      fetch('http://116.62.17.146:1189/system/api/screen/detaile', {
+      fetch('http://116.62.17.146:1189/system/api/screen/detail', {
         headers: { 'x-client': '1' }
       })
         .then(res => res.json())
@@ -51,7 +51,7 @@ const Home = () => {
     }, 60000);
 
     // 初次加载时调用接口
-    fetch('http://116.62.17.146:1189/system/api/screen/detaile', {
+    fetch('http://116.62.17.146:1189/system/api/screen/detail', {
       headers: { 'x-client': '1' }
     })
       .then(res => res.json())
@@ -150,7 +150,7 @@ const Home = () => {
     title: '用户',
     todayCount: data.accountCount,
     totalCount: data.accountTotalcount,
-    dailyStat: data?.accountScreenDTOList?.map(item => item.count),
+    dailyStat: data?.accountScreenDTOList||[],
     dailyStatChange: '11.94%', // 需要根据实际情况调整
   });
 
@@ -198,7 +198,7 @@ const Home = () => {
     title: 'App 使用情况',
     todayCount: data.appCount,
     totalCount: data.appTotalcount,
-    dailyStat: data?.appScreenDTOList,
+    dailyStat: data?.appScreenDTOList||[],
     dailyStatChange: '11.94%', // 需要根据实际情况调整
   });
 

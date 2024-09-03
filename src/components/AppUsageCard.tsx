@@ -10,11 +10,11 @@ const AppUsageCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChang
     return date.toLocaleString(); // 使用本地时间格式
   };
   const data = {
-    labels: dailyStat.length && dailyStat.map(i => i.dateDay) || [],
+    labels: dailyStat.length ? dailyStat.map(i => i.dateDay) : [],
     datasets: [
       {
         label: '每日新增用户数',
-        data: dailyStat.length && dailyStat.map(i => i.count) || [],
+        data: dailyStat.length ? dailyStat.map(i => i.count) : [],
         borderColor: '#106AF1',
         backgroundColor: 'rgba(155, 93, 229, 0.2)',
         fill: true,
