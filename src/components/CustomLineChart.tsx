@@ -18,7 +18,7 @@ const CustomLineChart = ({ data, options, todayCount, parentWidth = 320, parentH
             return (numberCount / 1000).toFixed(2) + 'K';
         }
     };
-    
+
     const customOptions = {
         ...options,
         plugins: {
@@ -85,8 +85,8 @@ const CustomLineChart = ({ data, options, todayCount, parentWidth = 320, parentH
     };
     const calculatePercentageChange = (data) => {
         if (data.datasets[0].data.length > 1) {
-            const firstValue = data.datasets[0].data[0];
-            const secondValue = data.datasets[0].data[1];
+            const firstValue = data.datasets[0].data[data.datasets[0].data.length - 1];
+            const secondValue = data.datasets[0].data[data.datasets[0].data.length - 2];
             const percentageChange = ((firstValue - secondValue) / secondValue) * 100;
             return percentageChange.toFixed(2);
         }
