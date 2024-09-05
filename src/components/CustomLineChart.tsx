@@ -30,7 +30,7 @@ const CustomLineChart = ({ data, options, todayCount, parentWidth = 320, parentH
                     label: function (context) {
                         setCurrentValue(context.raw);
                         setCurrentLabel(context.label);
-                        return `X: ${context.label}, Y: ${context.raw}`;
+                        return ``;
                     },
                 },
                 displayColors: false,
