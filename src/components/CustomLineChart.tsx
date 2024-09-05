@@ -5,12 +5,19 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-const CustomLineChart = ({ data, options, todayCount, parentWidth = 244, parentHeight }) => {
-    console.log(todayCount, 'todayCount');
+const CustomLineChart = ({ data, options, todayCount, parentWidth = 320, parentHeight }) => {
     const [currentValue, setCurrentValue] = useState(data.datasets[0].data.slice(-1)[0]);
     const [currentLabel, setCurrentLabel] = useState(data.labels.slice(-1)[0]);
 
     const chartRef = useRef(null);
+    const formatCount = (count) => {
+        const numberCount = Number(count);
+        if (numberCount < 1000) {
+            return numberCount;
+        } else {
+            return (numberCount / 1000).toFixed(2) + 'K';
+        }
+    };
 
     useEffect(() => {
         const chart = chartRef.current;
@@ -83,7 +90,7 @@ const CustomLineChart = ({ data, options, todayCount, parentWidth = 244, parentH
     return (
         <div className="bg-[#24263A] flex w-full">
             <div>
-                <div className="text-white text-5xl font-bold">{(Number(todayCount) / 1000) > 0 ? (Number(todayCount) / 1000) + 'K' : 0}</div>
+                <div className="text-white text-5xl font-bold">{formatCount(todayCount)}</div>
                 <div className="text-[#F19CFF] text-lg font-semibold mt-2 flex justify-start items-center">
                     <CustomImage alt={'logo'} src='/arrowTop.png' width={6} height={10} />
                     <div className='ml-[5px] text-[16px] font-bold'> 0%</div>
