@@ -10,6 +10,22 @@ import CustomImage from '@/components/CustomImage';
 
 const Home = () => {
   const [data, setData] = useState(null);
+  function getCurrentDateYYMMDD() {
+    // 获取当前日期  
+    const now = new Date();
+
+    // 获取年份，并取后两位  
+    const year = now.getFullYear().toString().slice(0, 4);
+
+    // 获取月份，注意月份是从0开始的，所以需要加1  
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+
+    // 获取日期  
+    const day = String(now.getDate()).padStart(2, '0');
+
+    // 拼接字符串  
+    return `${year}-${month}-${day}`;
+  }
 
   // 数据大屏自适应函数
   const handleScreenAuto = () => {
@@ -224,7 +240,7 @@ const Home = () => {
                 <CustomImage src="/title.png" width={90} height={45} alt="App Icon" />
               </div>
               <div className='flex-1 flex justify-end'>
-                <div className='font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-xl text-[#B5B9DD]'>2024/08/20</div>
+                <div className='font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-xl text-[#B5B9DD]'>{getCurrentDateYYMMDD()}</div>
               </div>
             </div>
             <NetworkCard {...networkCardData} />
