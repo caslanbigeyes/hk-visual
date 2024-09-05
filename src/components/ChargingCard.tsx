@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CustomLineChart from '@/components/CustomLineChart'
 import CustomImage from '@/components/CustomImage';
 import CountUp from 'react-countup';
+import hexToRgba from '@/util';
 
 
 const ChargingCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChange }) => {
@@ -21,10 +22,11 @@ const ChargingCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChang
       {
         label: activeButton === 'income' ? '总充电次数' : activeButton === 'chargeCount' ? '每日广告充电次数' : '每日付费充电次数',
         data: Array.isArray(dailyStat) && dailyStat.length ? dailyStat.map(i => i[activeButton]) : [],
-        borderColor: '#106AF1',
-        backgroundColor: 'rgba(155, 93, 229, 0.2)',
+        borderColor: '#1CB362',
+        backgroundColor: hexToRgba('#1CB362', 0.1),
         fill: true,
         tension: 0.4,
+        url: '/4.png'
       },
     ],
   };
@@ -144,7 +146,7 @@ const ChargingCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChang
 
 
       <div className='flex w-[400px] mt-[20px]'>
-        <CustomLineChart data={data} todayCount={dailyStat?.length&&dailyStat.map(i => i[activeButton])[0]} options={options} />
+        <CustomLineChart parentHeight={140} data={data} todayCount={dailyStat?.length && dailyStat.map(i => i[activeButton])[0]} options={options} />
       </div>
 
     </div>

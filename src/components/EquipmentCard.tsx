@@ -2,6 +2,7 @@ import React from 'react';
 import CustomLineChart from '@/components/CustomLineChart'
 import CustomImage from '@/components/CustomImage';
 import CountUp from 'react-countup';
+import hexToRgba from '@/util';
 
 
 const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCount, dailyStat, dailyStatChange }) => {
@@ -16,9 +17,10 @@ const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCo
         label: '每日新增用户数',
         data: Array.isArray(dailyStat) && dailyStat.length && dailyStat.map(i => i.count) || [],
         borderColor: '#106AF1',
-        backgroundColor: 'rgba(155, 93, 229, 0.2)',
+        backgroundColor: hexToRgba('#106AF1', 0.1),
         fill: true,
         tension: 0.4,
+        url: '/3.png'
       },
     ],
   };
@@ -106,7 +108,7 @@ const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCo
       </div>
 
       <div className='flex w-[400px] mt-[20px]'>
-        <CustomLineChart todayCount={dailyStat?.length&&dailyStat[0].count} data={data} options={options} />
+        <CustomLineChart todayCount={dailyStat?.length && dailyStat[0].count} data={data} options={options} />
       </div>
     </div>
   );

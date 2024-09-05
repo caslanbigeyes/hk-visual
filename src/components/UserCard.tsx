@@ -2,6 +2,7 @@ import React from 'react';
 import CustomImage from '@/components/CustomImage';
 import CustomLineChart from '@/components/CustomLineChart';
 import CountUp from 'react-countup';
+import hexToRgba from '@/util';
 
 
 const UserCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChange }) => {
@@ -15,10 +16,11 @@ const UserCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChange })
       {
         label: '每日新增用户数',
         data: Array.isArray(dailyStat) && dailyStat.length && dailyStat.map(i => i.count) || [],
-        borderColor: '#9b5de5',
-        backgroundColor: 'rgba(155, 93, 229, 0.2)',
+        borderColor: '#7B4397',
+        backgroundColor: hexToRgba('#7B4397', 0.1),
         fill: true,
         tension: 0.4,
+        url: '/arrowTop.png'
       },
     ],
   };

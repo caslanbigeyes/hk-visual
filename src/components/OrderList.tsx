@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import CustomImage from '@/components/CustomImage';
+import hexToRgba from '@/util';
 
 const OrderList = ({ order }) => {
   const [orders, setOrders] = useState(order);
@@ -56,7 +57,7 @@ const OrderList = ({ order }) => {
             <span className="ml-[22px]
             font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A]">用户</span>
           </div>
-          <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A]">网点</span>
+          <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A] ml-[-50px]">网点</span>
           <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A]">开始时间</span>
           <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A] mr-[38px]">结束时间</span>
         </div>

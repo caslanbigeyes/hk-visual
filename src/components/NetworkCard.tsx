@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import CustomImage from '@/components/CustomImage';
 import CustomLineChart from '@/components/CustomLineChart';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
+import hexToRgba from '@/util';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
@@ -13,7 +14,8 @@ const NetworkCard = ({ title, dailyData, dailyStat, dailyStatChange, yesterdayDa
 
   useEffect(() => {
     if (containerRef.current) {
-      setContainerWidth(containerRef.current.offsetWidth - 244);
+      console.log(containerRef.current.offsetWidth, 'containerRef.current.offsetWidth')
+      setContainerWidth(containerRef.current.offsetWidth - 12 - 204);
       const otherElementsHeight = Array.from(containerRef.current.children)
         .reduce((total, child) => total + child.offsetHeight, 0);
       setContainerHeight(containerRef.current.offsetHeight - otherElementsHeight);
@@ -31,10 +33,11 @@ const NetworkCard = ({ title, dailyData, dailyStat, dailyStatChange, yesterdayDa
       {
         label: '每日新增用户数',
         data: Array.isArray(dailyStat) && dailyStat.length && dailyStat.map(i => i.count) || [],
-        borderColor: '#9b5de5',
-        backgroundColor: 'rgba(155, 93, 229, 0.2)',
+        borderColor: '#10D3F1',
+        backgroundColor: hexToRgba('#10D3F1', 0.1),
         fill: true,
         tension: 0.4,
+        url: '/2.png'
       },
     ],
   };
@@ -80,13 +83,30 @@ const NetworkCard = ({ title, dailyData, dailyStat, dailyStatChange, yesterdayDa
   const getBackgroundColor = (index) => {
     switch (index) {
       case 0:
-        return '#FFA857';
+        return '/1N.png';
       case 1:
-        return '#508790';
+        return '/2N.png';
       case 2:
-        return '#B96245';
+        return '/3N.png';
+      case 3:
+        return '/4N.png';
       default:
-        return '#ABAECC';
+        return '/5N.png';
+    }
+  };
+
+  const getBackgroundColorColTwo = (index) => {
+    switch (index) {
+      case 0:
+        return '/6N.png';
+      case 1:
+        return '/7N.png';
+      case 2:
+        return '/8N.png';
+      case 3:
+        return '/9N.png';
+      default:
+        return '/10N.png';
     }
   };
 
@@ -108,18 +128,13 @@ const NetworkCard = ({ title, dailyData, dailyStat, dailyStatChange, yesterdayDa
           {dataTemp?.slice(0, 5).map((loc, index) => (
             <div key={index} className="flex items-center justify-between mb-2">
               <div className="flex items-center w-1/2">
-                <div
-                  className="mr-2 w-[24px] h-[24px] flex justify-center items-center text-[#000] rounded-[50%]"
-                  style={{ backgroundColor: getBackgroundColor(index) }}
-                >
-                  {index + 1}
-                </div>
-                <span className="text-white  truncate">{loc.name}</span>
+                <CustomImage src={getBackgroundColor(index) || "/1N.png"} width={24} height={24} alt="App Icon" />
+                <span className="text-white  truncate  ml-[8px]">{loc.name}</span>
               </div>
               <div className="w-1/2 bg-[#1D1E2C] rounded-full h-4 overflow-hidden">
                 <div
                   className="bg-[linear-gradient(360deg,#5C4F8E_0%,#668DE0_30%,#10D3F1_100%)] rounded-full h-4"
-                  style={{ width: `${loc.value }%` }}
+                  style={{ width: `${loc.value}%` }}
                 ></div>
               </div>
             </div>
@@ -129,18 +144,13 @@ const NetworkCard = ({ title, dailyData, dailyStat, dailyStatChange, yesterdayDa
           {dataTemp?.slice(5, 10).map((loc, index) => (
             <div key={index + 5} className="flex items-center justify-between mb-2">
               <div className="flex items-center w-1/2">
-                <div
-                  className="mr-2 w-[24px] h-[24px] flex justify-center items-center text-[#000] rounded-[50%]"
-                  style={{ backgroundColor: getBackgroundColor(index + 5) }}
-                >
-                  {index + 6}
-                </div>
-                <span className="text-white  truncate">{loc.name}</span>
+                <CustomImage src={getBackgroundColorColTwo(index) || "/1N.png"} width={24} height={24} alt="App Icon" />
+                <span className="text-white  truncate ml-[8px]">{loc.name}</span>
               </div>
               <div className="w-1/2 bg-[#1D1E2C]  rounded-full h-4 overflow-hidden">
                 <div
                   className="bg-[linear-gradient(360deg,#5C4F8E_0%,#668DE0_30%,#10D3F1_100%)] rounded-full h-4"
-                  style={{ width: `${loc.value }%` }}
+                  style={{ width: `${loc.value}%` }}
                 ></div>
               </div>
             </div>
@@ -155,7 +165,7 @@ const NetworkCard = ({ title, dailyData, dailyStat, dailyStatChange, yesterdayDa
       </div>
 
       <div className='flex w-full mt-[20px]'>
-        <CustomLineChart todayCount={dailyStat?.length&&dailyStat[0].count} data={data} options={options} parentWidth={containerWidth} parentHeight={150} />
+        <CustomLineChart todayCount={dailyStat?.length && dailyStat[0].count} data={data} options={options} parentWidth={containerWidth} parentHeight={150} />
       </div>
     </div>
   );
