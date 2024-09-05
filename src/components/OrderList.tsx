@@ -71,13 +71,13 @@ const OrderList = ({ order }) => {
           <div ref={listRef}>
             {orders?.map((order, index) => (
               <div key={index} className="flex items-center justify-between mb-2 p-2 font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-sm text-[#FFFFFF] rounded-lg">
-                <div className="flex items-center w-[120px]">
+                <div className="flex items-center w-[120px] overflow-hidden overflow-ellipsis whitespace-nowrap">
                   <img src={'/userIcon.png'} alt="User" className="w-8 h-8 rounded-full mr-2" />
                   <p className="text-white">{order.user}</p>
                 </div>
-                <p className="text-gray-400 w-[200px]">{order.location}</p>
-                <p className="text-gray-400 w-[150px]">{order.startTime}</p>
-                <p className="text-gray-400 w-[150px]">{order.endTime}</p>
+                <p className="text-gray-400 w-[200px]  overflow-hidden overflow-ellipsis whitespace-nowrap">{order.location}</p>
+                <p className="text-gray-400 w-[150px] overflow-hidden overflow-ellipsis whitespace-nowrap">{order.startTime}</p>
+                <p className="text-gray-400 w-[150px] overflow-hidden overflow-ellipsis whitespace-nowrap">{order.endTime}</p>
               </div>
             ))}
           </div>
