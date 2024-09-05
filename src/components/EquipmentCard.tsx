@@ -63,7 +63,7 @@ const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCo
   };
 
   return (
-    <div className="p-6   bg-[#24263A] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
+    <div className="p-6   h-[552px]    bg-[#24263A] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
       <div className="flex items-center">
         <div className="p-2 pl-0">
           <CustomImage src="/equip.png" width={32} height={32} alt="App Icon" />
@@ -100,11 +100,8 @@ const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCo
           </p>
         </div>
       </div>
-      <div className="mt-4 flex justify-center w-[160px] h-[40px] bg-[#106AF1] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] ">
-        <button
-        >
-          每日新增设备数
-        </button>
+      <div className="mt-4 flex justify-center items-center w-[160px] h-[40px] bg-[#106AF1] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] text-[#fff]">
+        每日新增设备数
       </div>
 
       <div className='flex w-[400px] mt-[20px]'>

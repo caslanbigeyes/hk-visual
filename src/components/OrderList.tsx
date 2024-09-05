@@ -43,7 +43,7 @@ const OrderList = ({ order }) => {
   }, [order?.length]);
 
   return (
-    <div className="p-6  bg-[#24263A] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
+    <div className="p-6  bg-[#24263A] h-[421px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
       <div className="flex items-center">
         <div className="p-2 pl-0">
           <CustomImage src="/onlineOrder.png" width={32} height={32} alt="App Icon" />
@@ -57,7 +57,7 @@ const OrderList = ({ order }) => {
             <span className="ml-[22px]
             font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A]">用户</span>
           </div>
-          <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A]">网点</span>
+          <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A] mr-[100px]">网点</span>
           <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A]">开始时间</span>
           <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A] mr-[38px]">结束时间</span>
         </div>
@@ -73,7 +73,7 @@ const OrderList = ({ order }) => {
                   <img src={'/userIcon.png'} alt="User" className="w-8 h-8 rounded-full mr-2" />
                   <p className="text-white">{order.user}</p>
                 </div>
-                <p className="text-gray-400 w-[100px]">{order.location}</p>
+                <p className="text-gray-400 w-[200px]">{order.location}</p>
                 <p className="text-gray-400 w-[150px]">{order.startTime}</p>
                 <p className="text-gray-400 w-[150px]">{order.endTime}</p>
               </div>

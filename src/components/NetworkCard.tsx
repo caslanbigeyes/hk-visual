@@ -112,7 +112,7 @@ const NetworkCard = ({ title, dailyData, dailyStat, dailyStatChange, yesterdayDa
 
 
   return (
-    <div ref={containerRef} className="p-6 bg-[#24263A] w-[968px]  rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
+    <div ref={containerRef} className="p-6 h-[479px] bg-[#24263A] w-[968px]  rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
       <div className="flex items-center">
         <div className="p-2 pl-0">
           <CustomImage src="/net.png" width={32} height={32} alt="App Icon" />
@@ -158,10 +158,8 @@ const NetworkCard = ({ title, dailyData, dailyStat, dailyStatChange, yesterdayDa
         </div>
       </div>
 
-      <div className="mt-4 flex justify-center w-[160px] h-[40px] bg-[#10D3F1] rounded-lg">
-        <button onClick={() => setActiveData('daily')}>
-          每日新增网点数
-        </button>
+      <div className="mt-4 flex justify-center items-center w-[160px] h-[40px] bg-[#10D3F1] rounded-lg text-[#fff]">
+        每日新增网点数
       </div>
 
       <div className='flex w-full mt-[20px]'>

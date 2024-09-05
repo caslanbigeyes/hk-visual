@@ -5,7 +5,7 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-const CustomLineChart = ({ data, options, todayCount, parentWidth = 320, parentHeight = 240 }) => {
+const CustomLineChart = ({ data, options, todayCount, parentWidth = 170, parentHeight = 240 }) => {
     const [currentValue, setCurrentValue] = useState(data.datasets[0].data.slice(-1)[0]);
     const [currentLabel, setCurrentLabel] = useState(data.labels.slice(-1)[0]);
 

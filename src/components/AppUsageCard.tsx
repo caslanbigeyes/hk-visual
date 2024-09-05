@@ -63,7 +63,7 @@ const AppUsageCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChang
   };
 
   return (
-    <div className="p-6  bg-[#24263A] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
+    <div className="p-6  bg-[#24263A]  h-[456px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
       <div className="flex items-center justify-items-start">
         <div className="p-2 pl-0">
           <CustomImage src="/AppUser.png" width={32} height={32} alt="App Icon" />
@@ -87,11 +87,8 @@ const AppUsageCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChang
         </div>
       </div>
 
-      <div className="mt-4 flex justify-center w-[160px] h-[40px] bg-[#F19A18] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] ">
-        <button
-        >
-          每日打开次数
-        </button>
+      <div className="mt-4 flex justify-center text-[#fff] items-center w-[160px] h-[40px] bg-[#F19A18] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] ">
+      每日打开次数
       </div>
 
       <div className='flex w-[400px] mt-[20px]'>

@@ -69,7 +69,7 @@ const ChargingCard = ({ title, chargeCount, chargeTotalcount, chargePayCount, ch
   };
 
   return (
-    <div className="p-6   bg-[#24263A] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
+    <div className="p-6 h-[552px]  bg-[#24263A] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
       <div className="flex items-center">
         <div className="p-2 pl-0">
           <CustomImage src="/charge.png" width={32} height={32} alt="App Icon" />
@@ -124,19 +124,19 @@ const ChargingCard = ({ title, chargeCount, chargeTotalcount, chargePayCount, ch
 
       <div className='flex'>
         <button
-          className={`flex items-center justify-center mt-4 p-3 h-[40px] ${activeButton === 'chargeCount' ? 'bg-[#1CB362]' : 'bg-[#3C4050]'} rounded-[10px]`}
+          className={`flex items-center justify-center mt-4 p-3 h-[40px] text-[#fff] ${activeButton === 'chargeCount' ? 'bg-[#1CB362]' : 'bg-[#3C4050]'} rounded-[10px]`}
           onClick={() => handleButtonClick('chargeCount')}
         >
           每日广告充电
         </button>
         <button
-          className={`flex items-center justify-center mt-4 ml-4 p-3 h-[40px] ${activeButton === 'incomeCount' ? 'bg-[#1CB362]' : 'bg-[#3C4050]'} rounded-[10px]`}
+          className={`flex items-center justify-center mt-4 ml-4 p-3 h-[40px] text-[#fff] ${activeButton === 'incomeCount' ? 'bg-[#1CB362]' : 'bg-[#3C4050]'} rounded-[10px]`}
           onClick={() => handleButtonClick('incomeCount')}
         >
           每日付费充电
         </button>
         <button
-          className={`flex items-center justify-center mt-4 ml-4 p-3 h-[40px] ${activeButton === 'income' ? 'bg-[#1CB362]' : 'bg-[#3C4050]'} rounded-[10px]`}
+          className={`flex items-center justify-center mt-4 ml-4 p-3 h-[40px] text-[#fff] ${activeButton === 'income' ? 'bg-[#1CB362]' : 'bg-[#3C4050]'} rounded-[10px]`}
           onClick={() => handleButtonClick('income')}
         >
           总充电
