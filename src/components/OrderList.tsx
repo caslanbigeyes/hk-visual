@@ -37,9 +37,9 @@ const OrderList = ({ order }) => {
   }, [orders]);
 
   useEffect(() => {
-   if(order?.length){
-    setOrders(prevOrders => [...prevOrders, ...order]);
-   }
+    if (order?.length) {
+      setOrders(prevOrders => [...prevOrders, ...order]);
+    }
   }, [order?.length]);
 
   return (
@@ -57,7 +57,7 @@ const OrderList = ({ order }) => {
             <span className="ml-[22px]
             font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A]">用户</span>
           </div>
-          <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A] ml-[-50px]">网点</span>
+          <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A]">网点</span>
           <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A]">开始时间</span>
           <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A] mr-[38px]">结束时间</span>
         </div>
@@ -69,13 +69,13 @@ const OrderList = ({ order }) => {
               <div key={index} className="flex items-center justify-between mb-2 p-2
               font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-sm text-[#FFFFFF]
               rounded-lg">
-                <div className="flex items-center">
+                <div className="flex items-center w-[120px]">
                   <img src={'/userIcon.png'} alt="User" className="w-8 h-8 rounded-full mr-2" />
                   <p className="text-white">{order.user}</p>
                 </div>
-                <p className="text-gray-400">{order.location}</p>
-                <p className="text-gray-400">{order.startTime}</p>
-                <p className="text-gray-400">{order.endTime}</p>
+                <p className="text-gray-400 w-[100px]">{order.location}</p>
+                <p className="text-gray-400 w-[150px]">{order.startTime}</p>
+                <p className="text-gray-400 w-[150px]">{order.endTime}</p>
               </div>
             ))}
           </div>

@@ -74,7 +74,7 @@ const CustomLineChart = ({ data, options, todayCount, parentWidth = 320, parentH
         },
         elements: {
             point: {
-                radius: 0, // 移除交点的小圆点
+                radius: 2, // 移除交点的小圆点
             },
             line: {
                 tension: 0, // 设置为折线图

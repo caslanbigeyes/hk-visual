@@ -177,9 +177,11 @@ const Home = () => {
 
   const getChargingCardData = (data) => ({
     title: '充电',
-    todayCount: data.chargeCount,
-    totalCount: data.chargeTotalcount,
-    dailyStat: data?.chargeScreenDTOList||[],
+    chargeCount: data.chargeCount,
+    chargeTotalcount: data.chargeTotalcount,
+    chargePayCount: data.chargePayCount,
+    chargePayTotalcount: data.chargePayTotalcount,
+    dailyStat: data?.chargeScreenDTOList || [],
     dailyStatChange: '11.94%', // 需要根据实际情况调整
   });
 
