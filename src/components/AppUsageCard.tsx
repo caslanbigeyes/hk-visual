@@ -63,7 +63,7 @@ const AppUsageCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChang
   };
 
   return (
-    <div className="p-6  h-[456px] bg-[#24263A] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
+    <div className="p-6  bg-[#24263A] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
       <div className="flex items-center justify-items-start">
         <div className="p-2 pl-0">
           <CustomImage src="/AppUser.png" width={32} height={32} alt="App Icon" />
