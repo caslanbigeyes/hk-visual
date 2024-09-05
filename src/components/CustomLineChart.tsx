@@ -108,7 +108,7 @@ const CustomLineChart = ({ data, options, todayCount, parentWidth = 170, parentH
                 </div>
             </div>
             <div className='ml-[24px]' style={{ width: parentWidth, maxHeight: parentHeight }}>
-                <Line data={data} options={customOptions} width={parentWidth} ref={chartRef} height={parentHeight} />
+                <Line data={data} options={customOptions} width={parentWidth} ref={chartRef}  />
             </div>
         </div >
     );
