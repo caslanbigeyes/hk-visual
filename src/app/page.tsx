@@ -225,7 +225,7 @@ const Home = () => {
       <div className="screen min-h-screen min-w-screen 
        
        inline-block  absolute left-2/4 origin-[0_0]"id="screen">
-        <div className="grid grid-cols-1 lg:grid-cols-[483px_968px_483px] gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[483px_888px_483px] gap-6">
           <div className="flex flex-col gap-6">
             <UserCard {...userCardData} />
             <ChargingCard {...chargingCardData} />
