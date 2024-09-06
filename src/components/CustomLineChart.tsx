@@ -23,7 +23,7 @@ const CustomLineChart = ({ data, options, todayCount, parentWidth = 320, parentH
                     label: function (context) {
                         setCurrentValue(context.raw);
                         setCurrentLabel(context.label);
-                        // return `X: ${context.label}, Y: ${context.raw}`;
+                        return `X: ${context.label}, Y: ${context.raw}`;
                     },
                 },
                 displayColors: false,
@@ -93,7 +93,7 @@ const CustomLineChart = ({ data, options, todayCount, parentWidth = 320, parentH
     const percentageChange = calculatePercentageChange(data);
 
     return (
-        <div className="bg-[#24263A] flex w-full">
+        <div className="bg-[#24263A] flex w-full justify-between items-center">
             <div>
                 <div className="text-white text-5xl font-bold inline">{formatCount(todayCount)}</div>{todayCount > 1000 ? <span className='text-white text-5xl font-bold '>{'K'}</span> : null}
                 <div className="text-[#F19CFF] text-lg font-semibold mt-2 flex justify-start items-center">

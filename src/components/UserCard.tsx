@@ -72,16 +72,16 @@ const UserCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChange })
         <h2 className="bold text-white text-xl">{title}</h2>
       </div>
       <div className="mt-4 flex">
-        <div className='flex flex-col mr-4'>
+        <div className='flex flex-col w-1/2'>
           <p className="font-normal text-xl text-[#A3A3A3] whitespace-nowrap">今日新增用户数</p>
           <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16 inline">
             <CountUp start={0} end={formatCount(todayCount)} /> {todayCount > 1000 ? <span>{'K'}</span> : null}
           </p>
         </div>
 
-        <div>
-          <p className="font-normal text-xl text-[#A3A3A3] ml-[100px]">总用户数</p>
-          <p className="font-bold text-[40px] text-[#FFFFFF] ml-[100px] max-w-16 inline">
+        <div className='w-1/2'>
+          <p className="font-normal text-xl text-[#A3A3A3]">总用户数</p>
+          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16 inline">
             <CountUp start={0} end={formatCount(totalCount, 'total')} /> {totalCount > 10000000 ? <span>{'K'}</span> : null}
           </p>
         </div>

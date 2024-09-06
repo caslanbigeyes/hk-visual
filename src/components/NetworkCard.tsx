@@ -13,7 +13,7 @@ const NetworkCard = ({ title, dailyData, dailyStat, dailyStatChange, yesterdayDa
 
   const updateContainerDimensions = () => {
     if (containerRef.current) {
-      console.log(containerRef.current.offsetWidth,3333)
+      console.log(containerRef.current.offsetWidth, 3333)
       setContainerWidth(containerRef.current.offsetWidth);
       const otherElementsHeight = Array.from(containerRef.current.children)
         .reduce((total, child) => total + child.offsetHeight, 0);
@@ -62,6 +62,7 @@ const NetworkCard = ({ title, dailyData, dailyStat, dailyStatChange, yesterdayDa
             return `${context.raw}K`;
           },
           afterLabel: function (context) {
+            console.log(context, 'context')
             return `2024.${context.label}`;
           },
         },

@@ -225,13 +225,13 @@ const Home = () => {
       <div className="screen min-h-screen min-w-screen 
        
        inline-block  absolute left-2/4 origin-[0_0]"id="screen">
-        <div className="grid grid-cols-1 lg:grid-cols-[483px_calc(100vw-1080px)_483px] gap-6">
-          <div className="flex flex-col gap-6">
+        <div className="flex gap-6">
+          <div className="flex flex-col gap-6" style={{ width: '500px' }} >
             <UserCard {...userCardData} />
             <ChargingCard {...chargingCardData} />
           </div>
 
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6" style={{ width: 'calc(100vw-1080px)', minWidth: '600px' }}>
             <div className=' p-6 w-full h-[84px] bg-[#24263A] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]  flex items-center'>
               <div className='flex-1 flex justify-start'>
                 <CustomImage src="/hello.png" width={83} height={16} alt="App Icon" />
@@ -247,7 +247,7 @@ const Home = () => {
             <OrderList order={orderListData} />
           </div>
 
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6" style={{ width: '500px' }} >
             <EquipmentCard {...equipmentCardData} />
             <AppUsageCard {...appUsageCardData} />
           </div>

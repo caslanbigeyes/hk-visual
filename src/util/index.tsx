@@ -14,10 +14,10 @@ const formatCount = (count, type) => {
         if (numberCount < 1000) {
             return numberCount;
         } else {
-            return (numberCount / 1000).toFixed(2).replace(/\.?0+$/, '')
+            return (numberCount / 1000).toFixed(0).replace(/\.?0+$/, '')
         }
     } else if (type === 'total' && numberCount > 10000000) {
-        return (numberCount / 1000).toFixed(2).replace(/\.?0+$/, '')
+        return (numberCount / 1000).toFixed(0).replace(/\.?0+$/, '')
     } else {
         return numberCount;
     }
