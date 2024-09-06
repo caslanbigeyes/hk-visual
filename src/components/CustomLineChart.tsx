@@ -103,7 +103,7 @@ const CustomLineChart = ({ data, options, todayCount, parentWidth = 320, parentH
                     > {percentageChange}%</div>
                 </div>
             </div>
-            <div className='ml-[24px]' style={{ width: parentWidth, maxHeight: parentHeight }}>
+            <div className='ml-[24px]' style={{ width: '100%', maxHeight: parentHeight }}>
                 <Line data={data} options={customOptions} width={parentWidth} ref={chartRef} />
             </div>
         </div >
