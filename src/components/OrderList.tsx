@@ -21,7 +21,7 @@ const OrderList = ({ order }) => {
 
         if (scrollElement.scrollTop >= scrollHeight - clientHeight) {
           // 滚动到底部时检查是否有新数据
-          if (order.length > orders.length) {
+          if (order?.length > orders?.length) {
             setOrders([...orders, ...order.slice(orders.length)]);
           } else {
             scrollElement.scrollTop = 0; // 滚动到顶部
@@ -62,7 +62,7 @@ const OrderList = ({ order }) => {
             <span className="ml-[22px] font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A]">用户</span>
           </div>
           <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A] mr-[100px]">网点</span>
-          <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A]">开始时间</span>
+          <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A] mr-[38px]">开始时间</span>
           <span className="font-[Source_Han_Sans,_Source_Han_Sans] font-medium text-base text-[#24263A] mr-[38px]">结束时间</span>
         </div>
       </div>

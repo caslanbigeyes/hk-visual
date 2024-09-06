@@ -16,8 +16,8 @@ const AppUsageCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChang
       {
         label: '每日打开次数',
         data: Array.isArray(dailyStat) && dailyStat.length && dailyStat.map(i => i.count) || [],
-        borderColor: '#F19A18',
-        backgroundColor: hexToRgba('#F19A18', 0.1),
+        borderColor: '#FFD239',
+        backgroundColor: hexToRgba('#FFD239', 0.1),
         fill: true,
         tension: 0.4,
         url: '/5.png'

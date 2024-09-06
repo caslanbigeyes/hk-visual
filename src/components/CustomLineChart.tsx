@@ -69,7 +69,8 @@ const CustomLineChart = ({ data, options, todayCount, parentWidth = 320, parentH
         },
         elements: {
             point: {
-                radius: 2, // 移除交点的小圆点
+                radius: 2, // 移除默认的小圆点
+                // pointStyle: new Image().src = '/dot.png', // 使用自定义图片
             },
             line: {
                 tension: 0, // 设置为折线图
@@ -94,7 +95,7 @@ const CustomLineChart = ({ data, options, todayCount, parentWidth = 320, parentH
     return (
         <div className="bg-[#24263A] flex w-full">
             <div>
-                <div className="text-white text-5xl font-bold">{formatCount(todayCount)}</div>
+                <div className="text-white text-5xl font-bold inline">{formatCount(todayCount)}</div>{todayCount > 1000 ? <span className='text-white text-5xl font-bold '>{'K'}</span> : null}
                 <div className="text-[#F19CFF] text-lg font-semibold mt-2 flex justify-start items-center">
                     <CustomImage alt={'logo'} src={data.datasets[0].url || '/arrowTop.png'} width={6} height={10} />
                     <div className='ml-[5px] text-[16px] font-bold'

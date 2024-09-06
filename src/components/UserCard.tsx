@@ -6,6 +6,7 @@ import { hexToRgba, formatCount } from '@/util';
 
 
 const UserCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChange }) => {
+  const totalData = Array.isArray(dailyStat) && dailyStat.length && dailyStat.map(i => i.count) || [];
   const data = {
     labels: Array.isArray(dailyStat) && dailyStat.length && dailyStat.map(i => {
       const date = new Date(i.dateDay);
@@ -15,9 +16,9 @@ const UserCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChange })
     datasets: [
       {
         label: '每日新增用户数',
-        data: Array.isArray(dailyStat) && dailyStat.length && dailyStat.map(i => i.count) || [],
-        borderColor: '#7B4397',
-        backgroundColor: hexToRgba('#7B4397', 0.1),
+        data: totalData,
+        borderColor: '#F19CFF',
+        backgroundColor: hexToRgba('#F19CFF', 0.1),
         fill: true,
         tension: 0.4,
         url: '/arrowTop.png'
@@ -72,7 +73,7 @@ const UserCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChange })
       </div>
       <div className="mt-4 flex">
         <div className='flex flex-col mr-4'>
-          <p className="font-normal text-xl text-[#A3A3A3]">今日新增用户数</p>
+          <p className="font-normal text-xl text-[#A3A3A3] whitespace-nowrap">今日新增用户数</p>
           <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16 inline">
             <CountUp start={0} end={formatCount(todayCount)} /> {todayCount > 1000 ? <span>{'K'}</span> : null}
           </p>
@@ -91,7 +92,7 @@ const UserCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChange })
       </div>
 
       <div className='flex w-[400px] mt-[20px]'>
-        <CustomLineChart todayCount={todayCount} data={data} options={options} />
+        <CustomLineChart todayCount={totalData[totalData?.length - 1]} data={data} options={options} />
       </div>
     </div>
   );
