@@ -2,7 +2,7 @@ import React from 'react';
 import CustomLineChart from '@/components/CustomLineChart'
 import CustomImage from '@/components/CustomImage';
 import CountUp from 'react-countup';
-import hexToRgba from '@/util';
+import { hexToRgba, formatCount } from '@/util';
 
 
 const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCount, dailyStat, dailyStatChange }) => {
@@ -75,13 +75,13 @@ const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCo
         <div className="mt-4 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">在线设备</p>
           <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
-            <CountUp start={0} end={Number(onlineCount)} />
+            <CountUp start={0} end={formatCount(Number(onlineCount))} />
           </p>
         </div>
         <div className="mt-4 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">离线设备</p>
           <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
-            <CountUp start={0} end={Number(offlineCount)} />
+            <CountUp start={0} end={formatCount(Number(offlineCount))} />
           </p>
         </div>
       </div>
@@ -90,13 +90,13 @@ const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCo
         <div className="mt-2 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">充电中设备</p>
           <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
-            <CountUp start={0} end={Number(chargingCount)} />
+            <CountUp start={0} end={formatCount(Number(chargingCount))} />
           </p>
         </div>
         <div className="mt-2 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">空闲设备</p>
           <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
-            <CountUp start={0} end={Number(idleCount)} />
+            <CountUp start={0} end={formatCount(Number(idleCount))} />
           </p>
         </div>
       </div>

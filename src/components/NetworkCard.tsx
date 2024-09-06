@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import CustomImage from '@/components/CustomImage';
 import CustomLineChart from '@/components/CustomLineChart';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js';
-import hexToRgba from '@/util';
-
+import { hexToRgba, formatCount } from '@/util';
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
 const NetworkCard = ({ title, dailyData, dailyStat, dailyStatChange, yesterdayData }) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import CustomImage from '@/components/CustomImage';
 import CustomLineChart from '@/components/CustomLineChart'
 import CountUp from 'react-countup';
-import hexToRgba from '@/util';
+import { hexToRgba, formatCount } from '@/util';
 
 const AppUsageCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChange }) => {
 
@@ -76,19 +76,19 @@ const AppUsageCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChang
         <div className="mt-4 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">今日新增打开次数</p>
           <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
-            <CountUp start={0} end={Number(todayCount)} />
+            <CountUp start={0} end={Number(formatCount(todayCount))} />
           </p>
         </div>
         <div className="mt-4 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">总打开次数</p>
           <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
-            <CountUp start={0} end={Number(totalCount)} />
+            <CountUp start={0} end={Number(formatCount(totalCount, 'total'))} />
           </p>
         </div>
       </div>
 
       <div className="mt-4 flex justify-center text-[#fff] items-center w-[160px] h-[40px] bg-[#F19A18] rounded-tl-[10px] rounded-br-[10px] rounded-tr-[10px] rounded-bl-[10px] ">
-      每日打开次数
+        每日打开次数
       </div>
 
       <div className='flex w-[400px] mt-[20px]'>

@@ -5,4 +5,24 @@ const hexToRgba = (hex, alpha) => {
     const b = parseInt(hex.slice(5, 7), 16);
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 };
-export default hexToRgba;
+
+
+
+const formatCount = (count, type) => {
+    const numberCount = Number(count);
+    if (!type) {
+        if (numberCount < 1000) {
+            return numberCount;
+        } else {
+            return (numberCount / 1000).toFixed(2).replace(/\.?0+$/, '') + 'K';
+        }
+    }
+
+    if (type === 'total' && numberCount > 10000000) {
+        return (numberCount / 10000).toFixed(2).replace(/\.?0+$/, '') + 'K';
+    }
+};
+
+
+export { hexToRgba, formatCount }
+

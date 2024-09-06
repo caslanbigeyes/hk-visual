@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Line } from 'react-chartjs-2';
+import { hexToRgba, formatCount } from '@/util';
 import CustomImage from '@/components/CustomImage';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 
@@ -10,14 +11,6 @@ const CustomLineChart = ({ data, options, todayCount, parentWidth = 320, parentH
     const [currentLabel, setCurrentLabel] = useState(data.labels.slice(-1)[0]);
 
     const chartRef = useRef(null);
-    const formatCount = (count) => {
-        const numberCount = Number(count);
-        if (numberCount < 1000) {
-            return numberCount;
-        } else {
-            return (numberCount / 1000).toFixed(2) + 'K';
-        }
-    };
 
     const customOptions = {
         ...options,
@@ -110,7 +103,7 @@ const CustomLineChart = ({ data, options, todayCount, parentWidth = 320, parentH
                 </div>
             </div>
             <div className='ml-[24px]' style={{ width: parentWidth, maxHeight: parentHeight }}>
-                <Line data={data} options={customOptions} width={parentWidth} ref={chartRef}  />
+                <Line data={data} options={customOptions} width={parentWidth} ref={chartRef} />
             </div>
         </div >
     );

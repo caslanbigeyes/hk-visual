@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CustomLineChart from '@/components/CustomLineChart'
 import CustomImage from '@/components/CustomImage';
 import CountUp from 'react-countup';
-import hexToRgba from '@/util';
+import { hexToRgba, formatCount } from '@/util';
 
 
 const ChargingCard = ({ title, chargeCount, chargeTotalcount, chargePayCount, chargePayTotalcount, dailyStat, dailyStatChange }) => {
@@ -83,7 +83,7 @@ const ChargingCard = ({ title, chargeCount, chargeTotalcount, chargePayCount, ch
           <div className="mt-4">
             <p className="font-normal text-xl text-[#A3A3A3]">今日广告充电</p>
             <p className="font-bold text-[40px] text-[rgb(255,255,255)]  max-w-16">
-              <CountUp start={0} end={Number(chargeCount)} />
+              <CountUp start={0} end={formatCount(Number(chargeCount))} />
             </p>
           </div>
         </div>
@@ -91,7 +91,7 @@ const ChargingCard = ({ title, chargeCount, chargeTotalcount, chargePayCount, ch
         <div className="mt-4 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">总充电次数</p>
           <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
-            <CountUp start={0} end={Number(chargeTotalcount)} />
+            <CountUp start={0} end={formatCount(Number(chargeTotalcount), 'total')} />
           </p>
         </div>
       </div>
@@ -108,14 +108,14 @@ const ChargingCard = ({ title, chargeCount, chargeTotalcount, chargePayCount, ch
         <div className="w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">今日充电收益</p>
           <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
-            <CountUp start={0} end={Number(chargePayCount)} />
+            <CountUp start={0} end={formatCount(Number(chargePayCount), 'total')} />
           </p>
         </div>
 
         <div className="w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">总充电收益</p>
           <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
-            <CountUp start={0} end={Number(chargePayTotalcount)} />
+            <CountUp start={0} end={formatCount(Number(chargePayTotalcount), 'total')} />
           </p>
         </div>
       </div>

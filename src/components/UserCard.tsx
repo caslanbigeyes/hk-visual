@@ -2,7 +2,7 @@ import React from 'react';
 import CustomImage from '@/components/CustomImage';
 import CustomLineChart from '@/components/CustomLineChart';
 import CountUp from 'react-countup';
-import hexToRgba from '@/util';
+import { hexToRgba, formatCount } from '@/util';
 
 
 const UserCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChange }) => {
