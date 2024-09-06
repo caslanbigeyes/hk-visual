@@ -77,7 +77,7 @@ const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCo
         <div className="mt-4 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">在线设备</p>
           <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16 inline">
-            <CountUp start={0} end={formatCount(onlineCounts)} />  {onlineCounts > 1000 ? <span>{'K'}</span> : null}
+            <CountUp start={0} end={formatCount(onlineCount)} />  {onlineCount > 1000 ? <span>{'K'}</span> : null}
           </p>
         </div>
         <div className="mt-4 w-1/2">
