@@ -10,19 +10,19 @@ const hexToRgba = (hex, alpha) => {
 
 const formatCount = (count, type) => {
     const numberCount = Number(count);
+
     if (!type) {
         if (numberCount < 1000) {
             return numberCount;
         } else {
-            return (numberCount / 1000).toFixed(0).replace(/\.?0+$/, '')
+            return Math.floor(numberCount / 1000); // 不保留小数
         }
     } else if (type === 'total' && numberCount > 10000000) {
-        return (numberCount / 1000).toFixed(0).replace(/\.?0+$/, '')
+        return Math.floor(numberCount / 1000); // 不保留小数
     } else {
         return numberCount;
     }
 };
-
 
 export { hexToRgba, formatCount }
 
