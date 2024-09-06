@@ -11,14 +11,23 @@ const NetworkCard = ({ title, dailyData, dailyStat, dailyStatChange, yesterdayDa
   const [containerWidth, setContainerWidth] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
 
-  useEffect(() => {
+  const updateContainerDimensions = () => {
     if (containerRef.current) {
-      console.log(containerRef.current.offsetWidth, 'containerRef.current.offsetWidth')
+      console.log(containerRef.current.offsetWidth,3333)
       setContainerWidth(containerRef.current.offsetWidth);
       const otherElementsHeight = Array.from(containerRef.current.children)
         .reduce((total, child) => total + child.offsetHeight, 0);
       setContainerHeight(containerRef.current.offsetHeight - otherElementsHeight);
     }
+  };
+
+  useEffect(() => {
+    updateContainerDimensions();
+    window.addEventListener('resize', updateContainerDimensions);
+
+    return () => {
+      window.removeEventListener('resize', updateContainerDimensions);
+    };
   }, []);
 
   let dataTemp = activeData === 'daily' ? dailyData : yesterdayData;
@@ -26,7 +35,7 @@ const NetworkCard = ({ title, dailyData, dailyStat, dailyStatChange, yesterdayDa
     labels: Array.isArray(dailyStat) && dailyStat.length && dailyStat.map(i => {
       const date = new Date(i.dateDay);
       const day = date.getDate().toString(); // 获取日期的日部分并转换为字符串
-      return day
+      return day;
     }) || [],
     datasets: [
       {
@@ -78,7 +87,6 @@ const NetworkCard = ({ title, dailyData, dailyStat, dailyStatChange, yesterdayDa
     },
   };
 
-
   const getBackgroundColor = (index) => {
     switch (index) {
       case 0:
@@ -109,9 +117,8 @@ const NetworkCard = ({ title, dailyData, dailyStat, dailyStatChange, yesterdayDa
     }
   };
 
-
   return (
-    <div ref={containerRef} className="p-6 h-[479px] bg-[#24263A]   rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
+    <div ref={containerRef} className="p-6 h-[479px] bg-[#24263A] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
       <div className="flex items-center">
         <div className="p-2 pl-0">
           <CustomImage src="/net.png" width={32} height={32} alt="App Icon" />
@@ -128,7 +135,7 @@ const NetworkCard = ({ title, dailyData, dailyStat, dailyStatChange, yesterdayDa
             <div key={index} className="flex items-center justify-between mb-2">
               <div className="flex items-center w-1/2">
                 <CustomImage src={getBackgroundColor(index) || "/1N.png"} width={24} height={24} alt="App Icon" />
-                <span className="text-white  truncate  ml-[8px]">{loc.name}</span>
+                <span className="text-white truncate ml-[8px]">{loc.name}</span>
               </div>
               <div className="w-1/2 bg-[#1D1E2C] rounded-full h-4 overflow-hidden">
                 <div
@@ -144,9 +151,9 @@ const NetworkCard = ({ title, dailyData, dailyStat, dailyStatChange, yesterdayDa
             <div key={index + 5} className="flex items-center justify-between mb-2">
               <div className="flex items-center w-1/2">
                 <CustomImage src={getBackgroundColorColTwo(index) || "/1N.png"} width={24} height={24} alt="App Icon" />
-                <span className="text-white  truncate ml-[8px]">{loc.name}</span>
+                <span className="text-white truncate ml-[8px]">{loc.name}</span>
               </div>
-              <div className="w-1/2 bg-[#1D1E2C]  rounded-full h-4 overflow-hidden">
+              <div className="w-1/2 bg-[#1D1E2C] rounded-full h-4 overflow-hidden">
                 <div
                   className="bg-[linear-gradient(360deg,#5C4F8E_0%,#668DE0_30%,#10D3F1_100%)] rounded-full h-4"
                   style={{ width: `${loc.value}%` }}
@@ -162,7 +169,7 @@ const NetworkCard = ({ title, dailyData, dailyStat, dailyStatChange, yesterdayDa
       </div>
 
       <div className='flex w-full mt-[20px]'>
-        <CustomLineChart todayCount={dailyStat?.length && dailyStat[0].count} data={data} options={options} parentWidth={containerWidth} parentHeight={150} />
+        <CustomLineChart todayCount={dailyStat?.length && dailyStat[0].count} data={data} options={options} parentWidth={650} parentHeight={150} />
       </div>
     </div>
   );
