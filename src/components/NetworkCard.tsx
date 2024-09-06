@@ -30,7 +30,7 @@ const NetworkCard = ({ title, dailyData, dailyStat, dailyStatChange, yesterdayDa
     }) || [],
     datasets: [
       {
-        label: '每日新增用户数',
+        label: '每日新增网点数',
         data: Array.isArray(dailyStat) && dailyStat.length && dailyStat.map(i => i.count) || [],
         borderColor: '#10D3F1',
         backgroundColor: hexToRgba('#10D3F1', 0.1),

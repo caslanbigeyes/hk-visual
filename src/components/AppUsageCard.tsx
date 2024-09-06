@@ -14,7 +14,7 @@ const AppUsageCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChang
     }) || [],
     datasets: [
       {
-        label: '每日新增用户数',
+        label: '每日打开次数',
         data: Array.isArray(dailyStat) && dailyStat.length && dailyStat.map(i => i.count) || [],
         borderColor: '#F19A18',
         backgroundColor: hexToRgba('#F19A18', 0.1),
@@ -74,15 +74,15 @@ const AppUsageCard = ({ title, todayCount, totalCount, dailyStat, dailyStatChang
 
       <div className='flex justify-center items-center'>
         <div className="mt-4 w-1/2">
-          <p className="font-normal text-xl text-[#A3A3A3]">今日新增打开次数</p>
-          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
-            <CountUp start={0} end={Number(formatCount(todayCount))} />
+          <p className="font-normal text-xl text-[#A3A3A3]">今日打开次数</p>
+          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16 inline">
+            <CountUp start={0} end={Number(formatCount(todayCount))} />{todayCount > 1000 ? <span>{'K'}</span> : null}
           </p>
         </div>
         <div className="mt-4 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">总打开次数</p>
-          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
-            <CountUp start={0} end={Number(formatCount(totalCount, 'total'))} />
+          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16 inline">
+            <CountUp start={0} end={Number(formatCount(totalCount, 'total'))} />{totalCount > 10000000 ? <span>{'K'}</span> : null}
           </p>
         </div>
       </div>

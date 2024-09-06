@@ -14,7 +14,7 @@ const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCo
     }) || [],
     datasets: [
       {
-        label: '每日新增用户数',
+        label: '每日新增设备数',
         data: Array.isArray(dailyStat) && dailyStat.length && dailyStat.map(i => i.count) || [],
         borderColor: '#106AF1',
         backgroundColor: hexToRgba('#106AF1', 0.1),
@@ -62,6 +62,8 @@ const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCo
     },
   };
 
+  const onlineCounts = formatCount(onlineCount)
+  console.log(onlineCounts, 'onlineCounts')
   return (
     <div className="p-6   h-[552px]    bg-[#24263A] rounded-tl-[30px] rounded-br-[30px] rounded-tr-[30px] rounded-bl-[30px]">
       <div className="flex items-center">
@@ -74,14 +76,14 @@ const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCo
       <div className='flex justify-center items-center'>
         <div className="mt-4 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">在线设备</p>
-          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
-            <CountUp start={0} end={formatCount(Number(onlineCount))} />
+          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16 inline">
+            <CountUp start={0} end={formatCount(onlineCounts)} />  {onlineCounts > 1000 ? <span>{'K'}</span> : null}
           </p>
         </div>
         <div className="mt-4 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">离线设备</p>
-          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
-            <CountUp start={0} end={formatCount(Number(offlineCount))} />
+          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16 inline">
+            <CountUp start={0} end={formatCount(offlineCount)} /> {offlineCount > 1000 ? <span>{'K'}</span> : null}
           </p>
         </div>
       </div>
@@ -89,14 +91,14 @@ const EquipmentCard = ({ title, onlineCount, offlineCount, chargingCount, idleCo
       <div className='flex justify-center items-center'>
         <div className="mt-2 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">充电中设备</p>
-          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
-            <CountUp start={0} end={formatCount(Number(chargingCount))} />
+          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16 inline">
+            <CountUp start={0} end={formatCount(chargingCount)} /> {chargingCount > 1000 ? <span>{'K'}</span> : null}
           </p>
         </div>
         <div className="mt-2 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">空闲设备</p>
-          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
-            <CountUp start={0} end={formatCount(Number(idleCount))} />
+          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16 inline">
+            <CountUp start={0} end={formatCount(idleCount)} /> {idleCount > 1000 ? <span>{'K'}</span> : null}
           </p>
         </div>
       </div>

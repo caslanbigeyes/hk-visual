@@ -82,16 +82,16 @@ const ChargingCard = ({ title, chargeCount, chargeTotalcount, chargePayCount, ch
         <div className="w-1/2">
           <div className="mt-4">
             <p className="font-normal text-xl text-[#A3A3A3]">今日广告充电</p>
-            <p className="font-bold text-[40px] text-[rgb(255,255,255)]  max-w-16">
-              <CountUp start={0} end={formatCount(Number(chargeCount))} />
+            <p className="font-bold text-[40px] text-[rgb(255,255,255)]  max-w-16 inline">
+              <CountUp start={0} end={formatCount(Number(chargeCount))} />{chargeTotalcount > 1000 ? <span>{'K'}</span> : null}
             </p>
           </div>
         </div>
 
         <div className="mt-4 w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">总充电次数</p>
-          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
-            <CountUp start={0} end={formatCount(Number(chargeTotalcount), 'total')} />
+          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16 inline">
+            <CountUp start={0} end={formatCount(Number(chargeTotalcount), 'total')} />{chargeTotalcount > 10000000 ? <span>{'K'}</span> : null}
           </p>
         </div>
       </div>
@@ -107,15 +107,15 @@ const ChargingCard = ({ title, chargeCount, chargeTotalcount, chargePayCount, ch
       <div className='flex justify-center items-center'>
         <div className="w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">今日充电收益</p>
-          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
-            <CountUp start={0} end={formatCount(Number(chargePayCount), 'total')} />
+          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16 inline">
+            <CountUp start={0} end={formatCount(Number(chargePayCount), 'total')} />{chargePayCount > 1000 ? <span>{'K'}</span> : null}
           </p>
         </div>
 
         <div className="w-1/2">
           <p className="font-normal text-xl text-[#A3A3A3]">总充电收益</p>
-          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16">
-            <CountUp start={0} end={formatCount(Number(chargePayTotalcount), 'total')} />
+          <p className="font-bold text-[40px] text-[#FFFFFF]  max-w-16 inline">
+            <CountUp start={0} end={formatCount(Number(chargePayTotalcount), 'total')} />{chargePayCount > 10000000 ? <span>{'K'}</span> : null}
           </p>
         </div>
       </div>
