@@ -83,7 +83,7 @@ const ChargingCard = ({ title, chargeCount, chargeTotalcount, chargePayCount, ch
           <div className="mt-4">
             <p className="font-normal text-xl text-[#A3A3A3]">今日广告充电</p>
             <p className="font-bold text-[40px] text-[rgb(255,255,255)]  max-w-16 inline">
-              <CountUp start={0} end={formatCount(Number(chargeCount))} />{chargeTotalcount > 1000 ? <span>{'K'}</span> : null}
+              <CountUp start={0} end={formatCount(Number(chargeCount))} />{chargeCount > 1000 ? <span>{'K'}</span> : null}
             </p>
           </div>
         </div>
