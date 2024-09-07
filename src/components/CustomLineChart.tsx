@@ -39,6 +39,10 @@ const CustomLineChart = ({ data, options, todayCount, parentWidth = 320, parentH
                 caretSize: 6,
             },
         },
+        hover: {
+            mode: 'index', // 设置为索引模式
+            intersect: false, // 确保不需要交叉点
+        },
         scales: {
             x: {
                 grid: {
@@ -59,6 +63,7 @@ const CustomLineChart = ({ data, options, todayCount, parentWidth = 320, parentH
                 },
             },
             y: {
+                beginAtZero:true,
                 ticks: {
                     color: '#474C55',
                     font: {
